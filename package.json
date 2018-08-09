@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Gabriel-Gebril/vins#readme",
   "dependencies": {
     "ejs": "^2.6.1",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "faker": "^4.1.0"
   }
 }

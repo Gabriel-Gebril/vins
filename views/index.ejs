@@ -24,10 +24,12 @@
         </thead>
         <tbody>
             <%for(var i = 0; i<80; i++){%>
+                    <%randomTotal = Math.round(Math.random() * 1000)%>
+                    <%randomAv = Math.round(Math.random() * randomTotal);%>
             <tr>
-                <td>51</td>
-                <td>52</td>
-                <td>53</td>
+                <td><%= randomProduct[i] %></td>
+                <td><%=  randomAv %></td>
+                <td><%= randomTotal %></td>
             </tr>
 
             <%}%>   
