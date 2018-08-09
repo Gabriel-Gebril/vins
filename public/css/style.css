@@ -1,0 +1,83 @@
+body {
+  padding-top: 120px;
+}
+
+.navbar {
+  height: 50px;
+  padding: 0 15px 0px 15px;
+  width: 100%;
+  top: 0px;
+  position: fixed;
+  z-index: 1;
+  background: rgb(122,0,60);
+}
+
+.navbar {margin-bottom: 0;}
+
+.navbar a {
+  color: white;
+  line-height: 3em;
+}
+
+.table-area {
+  position: relative;
+  z-index: 0;
+  margin-top: 50px;
+}
+
+.navbar {
+    min-height: 80px;
+  }
+  
+  .navbar-brand {
+    padding: 0 15px;
+    height: 80px;
+    line-height: 80px;
+  }
+  
+  .navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 23px;
+    padding: 9px 10px !important;
+  }
+
+table.responsive-table {
+  display: table;
+  /* required for table-layout to be used (not normally necessary; included for completeness) */
+  table-layout: fixed;
+  /* this keeps your columns with fixed with exactly the right width */
+  width: 100%;
+  /* table must have width set for fixed layout to work as expected */
+  height: 100%;
+}
+
+table.responsive-table thead {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 50px;
+  line-height: 3em;
+  table-layout: fixed;
+  display: table;
+}
+
+table.responsive-table th {
+    background: rgb(122,0,60);
+    color: white;
+
+}
+
+table.responsive-table td {
+  line-height: 2em;
+}
+
+table.responsive-table tr > td,
+table.responsive-table th {
+  text-align: left;
+}
+
+img{
+    height: 40px;
+}

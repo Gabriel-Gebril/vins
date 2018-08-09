@@ -1,0 +1,23 @@
+{
+  "name": "vins",
+  "version": "1.0.0",
+  "description": "Inventory management system for Venture Engineering and Science",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabriel-Gebril/vins.git"
+  },
+  "author": "Gabriel Gebril",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gabriel-Gebril/vins/issues"
+  },
+  "homepage": "https://github.com/Gabriel-Gebril/vins#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}

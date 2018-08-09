@@ -1,0 +1,39 @@
+<% include partials/header.ejs %>
+<div id="container">
+    <nav class="navbar navbar-expand-sm fixed-top">
+            <a class="navbar-brand" href="#"><img id="vLogo" src="/img/VentureLogo.png"></a>
+        
+              <ul class="navbar-nav mr-auto">
+            
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+              </form>
+    </nav>
+</div>
+
+
+    <table class="table responsive-table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>In Stock</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for(var i = 0; i<80; i++){%>
+            <tr>
+                <td>51</td>
+                <td>52</td>
+                <td>53</td>
+            </tr>
+
+            <%}%>   
+        </tbody>
+    </table>
+
+
+
+<% include partials/footer.ejs %>
