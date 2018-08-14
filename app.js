@@ -21,8 +21,8 @@ var newI = {
 //     console.log(result);
 // });
 
-item.findById(5, function(result){
-     console.log(result[0]);
+item.findByName("test", function(result){
+     console.log(result);
 });
 
 

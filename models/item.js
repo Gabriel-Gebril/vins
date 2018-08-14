@@ -49,3 +49,15 @@ exports.findById = function(itemid, callback){
         }
     });
 }
+
+exports.findByName = function(itemName, callback){
+    var sql = `SELECT * FROM items WHERE name LIKE "%` + [itemName] + `%"`;
+
+    db.query(sql,function(err,result, fields){
+        if (err){
+            console.log(err);
+        }else{
+           return callback(result);
+        }
+    });
+}
