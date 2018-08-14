@@ -2,13 +2,12 @@ var express = require("express"),
     app = express(),
     faker = require('faker'),
     index = require("./routes/index"),
-    db = require("./helpers/db");
+    db = require("./helpers/db"),
+    item = require("./models/item");
 
 app.use(index);
 
-var item = require("./models/item");
-
-item.create("Test item2",5,100,"","");
+item.create("Test item55",5,100,"","");
 
 
 
