@@ -17,18 +17,35 @@ db.query(createItems,function(err,result){
     if (err){
         console.log(err);
     }else{
-        console.log(result);
+        //console.log(result);
     }
 });
 
-exports.create = function(name, instock, total, desc, signed_out_by){
-    var sql = "INSERT INTO items(name,instock,total,description,signed_out_by) VALUES("+"\""+name+"\""+"," +instock +"," + total +"," +"\""+desc+"\""+"," + "\""+signed_out_by+"\"" +")";
+exports.create = function(obj,callback){
+    if (obj.instock < obj.total){
+        var sql = "INSERT INTO items(name,instock,total,description,signed_out_by) VALUES("+"\""+obj.name+"\""+"," +obj.instock +"," + obj.total +"," +"\""+obj.description+"\""+"," + "\""+obj.signed_out_by+"\"" +")";
 
-    db.query(sql , function(err,result){
-        if(err){
-            console.log(err.errno);
+        db.query(sql , function(err,result){
+            if(err){
+                console.log(err.errno);
+            }else{
+                return callback(result);
+            }
+        });
+    }else{
+        throw "invalid instock to total ratio!";
+    }
+    
+}
+
+exports.findById = function(itemid, callback){
+    var sql = "SELECT * FROM items WHERE id LIKE " + itemid;
+
+    db.query(sql,function(err,result, fields){
+        if (err){
+            console.log(err);
         }else{
-            console.log(result);
+           return callback(result);
         }
     });
 }
