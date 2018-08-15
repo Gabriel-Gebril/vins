@@ -27,7 +27,7 @@ exports.create = function(obj,callback){
 
         db.query(sql , function(err,result){
             if(err){
-                console.log(err.errno);
+                console.log(err);
             }else{
                 return callback(result);
             }
@@ -53,11 +53,23 @@ exports.findById = function(itemid, callback){
 exports.findByName = function(itemName, callback){
     var sql = `SELECT * FROM items WHERE name LIKE "%` + [itemName] + `%"`;
 
-    db.query(sql,function(err,result, fields){
+    db.query(sql,function(err,result){
         if (err){
             console.log(err);
         }else{
            return callback(result);
+        }
+    });
+}
+
+exports.getItems = function(startStop, callback){
+    var sql = `SELECT * FROM items LIMIT ` + startStop[0] + "," + startStop[1];
+
+    db.query(sql, function(err,result){
+        if (err){
+            console.log(err);
+        }else{
+            return callback(result);
         }
     });
 }

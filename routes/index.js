@@ -1,23 +1,18 @@
 var express = require("express"),
     router = express.Router(),
-    faker = require("faker");
-    
+    items = require("./itemsRoute");
+
 router.use(express.static('./public'));
 router.use(express.static('./controllers'));
 
 router.get("/", function(req,res){
-    res.redirect("/items");
+    res.redirect("/items/0");
 });
 
 router.get("/items", function(req,res){
-    var randomProduct = [];
-    for(var i = 0; i<80; i++){
-        randomProduct.push(faker.commerce.productName())
-    }
-    var randomTotal = Math.random() * 1000
-    var randomAv = Math.random * randomTotal;
-    res.render("index", {randomProduct : randomProduct, randomTotal: randomTotal,
-     randomAv: randomAv});
+    res.redirect("/items/0");
 });
+
+router.use("/items", items);
 
 module.exports = router;

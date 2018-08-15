@@ -17,13 +17,22 @@ var newI = {
     signed_out_by: "Gabriel"
 }
 
-// item.create(newI, function(result){
-//     console.log(result);
-// });
-
-item.findByName("test", function(result){
-     console.log(result);
+item.create(newI, function(result){
+    console.log(result);
 });
+
+// for (let index = 0; index < 100; index++) {
+//     item.create({
+//         name: "Test Item" + (index+1),
+//         instock: index,
+//         total: index + 100,
+//         description: "",
+//         signed_out_by: ""
+//     }, function(result){
+
+//     });
+    
+// }
 
 
 

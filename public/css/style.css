@@ -1,7 +1,10 @@
 body {
   padding-top: 120px;
 }
-
+#pPage{
+  float: left;
+  margin: 20px;
+}
 .navbar {
   height: 50px;
   padding: 0 15px 0px 15px;
@@ -10,6 +13,15 @@ body {
   position: fixed;
   z-index: 1;
   background: rgb(122,0,60);
+}
+
+.footer{
+  background: rgb(122,0,60);
+  height: 8vh;
+}
+.footer .btn{
+  float: right;
+  margin: 20px;
 }
 
 .navbar {margin-bottom: 0;}
