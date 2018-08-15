@@ -11,6 +11,7 @@ body {
   width: 100%;
   top: 0px;
   position: fixed;
+  z-index: 1;
   background: rgb(122,0,60);
 }
 
@@ -38,6 +39,7 @@ body {
 
 .table-area {
   position: relative;
+  z-index: 0;
   margin-top: 50px;
 }
 
