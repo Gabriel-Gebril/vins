@@ -1,10 +1,11 @@
     <footer class="footer">
-      <form action=<%= page + 1%> method="GET">
-          <button class="btn btn-default">Next Page</button>
+      <form action="/items/" method="GET">
+            <button class="btn btn-default" name="count" value=<%= page + 1%> >Next Page</button>
       </form>
 
-      <form action=<%= page - 1%> method="GET">
-          <button class="btn btn-default" id="pPage">Previous Page</button>
+      <form action="/items/" method="GET">
+
+          <button class="btn btn-default" name="count" id="pPage" value=<%= page - 1%> >Previous Page</button>
       </form>
         
     </footer>

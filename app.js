@@ -5,8 +5,10 @@ var express = require("express"),
     db = require("./helpers/db"),
     item = require("./models/item");
 
+
 app.set("view engine", "ejs");
 app.use(index);
+
 
 
 // var newI = {

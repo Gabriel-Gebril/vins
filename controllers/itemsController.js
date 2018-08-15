@@ -10,18 +10,23 @@ exports.itemsGET = function(req, res){
     // var randomTotal = Math.random() * 1000
     // var randomAv = Math.random * randomTotal;
     // res.render("index", {randomProduct : randomProduct, randomTotal: randomTotal,randomAv: randomAv});
-    if (parseInt(req.params.page)<0){
-        res.redirect("/items/" + (parseInt(req.params.page)+1));
+    
+    if (isNaN(parseInt(req.query.count))){
+        var num = 0;
+    }else if(parseInt(req.query.count) <= 0){
+        res.redirect("/items");
     }else{
-        items.getItems([parseInt(req.params.page) * 50,50],function(result){
-            if (result.length === 0){
-                res.redirect("/items/" + (parseInt(req.params.page)-1));
-            }else{
-                res.render("index", {item: result, page :  parseInt(req.params.page)});
-            }
-            
-        });
+        var num = parseInt(req.query.count);
     }
+    
+    items.getItems([num * 50,50],function(result){
+        if (result.length === 0){
+            res.redirect("/items/?count=" + (parseInt(req.query.count) - 1));
+        }else{
+            res.render("index", {item: result, page :  parseInt(req.query.count)});
+        }
+        
+    });
     
 
 }
