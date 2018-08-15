@@ -3,7 +3,7 @@ body {
 }
 #pPage{
   float: left;
-  margin: 20px;
+  margin: 10px;
 }
 .navbar {
   height: 50px;
@@ -17,11 +17,11 @@ body {
 
 .footer{
   background: rgb(122,0,60);
-  height: 8vh;
+  height: 15vh;
 }
 .footer .btn{
   float: right;
-  margin: 20px;
+  margin: 10px;
 }
 
 .navbar {margin-bottom: 0;}
