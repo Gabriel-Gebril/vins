@@ -63,7 +63,8 @@ exports.newItem = function(req,res){
             instock : itemCon.amount,
             total : itemCon.amount,
             description : itemCon.description,
-            signed_out_by : sb
+            signed_out_by : sb,
+            location : itemCon.location
         }
         items.createBulk(newItem, function(err,result){
             if(err){

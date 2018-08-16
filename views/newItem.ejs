@@ -1,4 +1,21 @@
-<% include partials/header.ejs %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Venture Inventory</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" >
+        <link rel="stylesheet" type="text/css" href="/vendor/fontawesome/css/fontawesome.min.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/brands.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/solid.css">
+        <script src="/libs/jquery-3.3.1.min.js"></script>
+        <script src="/libs/bootstrap.bundle.min.js"></script>
+        <script src="/formAdd.js"></script>
+        
+    </head>
+    <body>
 
 <div id="container">
         <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
@@ -21,16 +38,20 @@
     </div>
 
 <form action="/items" method="POST">
-    <input type="text" name="itemName" required placeholder="Name of Item">
-    <input type="text" name="amount" required placeholder="Amount added">
-    <input type="text" name="description" placeholder="Description of item">
-    <br>
-    <input type="text" name="itemName" required placeholder="Name of Item">
-    <input type="text" name="amount" required placeholder="Amount added">
-    <input type="text" name="description" placeholder="Description of item">
-    <button type="button" class="btn btn-info"><i class="fas fa-plus"></i></button>
-    <br>
-    <button class="btn btn-success" type="submit">Add items</button>
+    <div class="container">
+        <ul id="addForm">
+            <li>
+                <input type="text" name="itemName" required placeholder="Name of Item">
+                <input type="text" name="amount" required placeholder="Amount added">
+                <input type="text" name="location" required placeholder="Location of item">
+                <input type="text" name="description" placeholder="Description of item">
+            </li>
+
+        </ul>
+        <button id="moreItems" type="button" class="btn btn-info"><i class="fas fa-plus"></i>   Add another Item</button>
+        <button id="commitItems" class="btn btn-success" type="submit">Commit changes</button>
+    </div>
+    
 </form>
 
 </body>

@@ -99,3 +99,22 @@ table.responsive-table th {
 img{
     height: 70px;
 }
+
+#addForm{
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  text-align: center;
+}
+
+#addForm li{
+  display: inline-block;
+}
+
+#moreItems{
+  float: left;
+}
+
+#commitItems{
+  float: right;
+}

@@ -6,7 +6,7 @@ var express = require("express"),
     item = require("./models/item"),
     body = require("body-parser");
 
-app.use(express.static("/public"))
+
 app.set("view engine", "ejs");
 
 app.use(body.urlencoded({
