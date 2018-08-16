@@ -23,7 +23,7 @@ exports.itemsGET = function(req, res){
     
     items.getItems([num * 50,50],function(err,result){
         if (result.length === 0){
-            res.render("index", {item: result, page :  parseInt(req.query.count), search : ""});
+            res.redirect("/items/?count=" + (parseInt(req.query.count)-1));
         }else{
             res.render("index", {item: result, page :  parseInt(req.query.count), search : ""});
         }
