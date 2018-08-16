@@ -22,19 +22,14 @@ db.query(createItems,function(err,result){
 });
 
 exports.create = function(obj,callback){
-    if (obj.instock < obj.total){
-        var sql = "INSERT INTO items(name,instock,total,description,signed_out_by) VALUES("+"\""+obj.name+"\""+"," +obj.instock +"," + obj.total +"," +"\""+obj.description+"\""+"," + "\""+obj.signed_out_by+"\"" +")";
-
-        db.query(sql , function(err,result){
-            if(err){
-                console.log(err);
-            }else{
-                return callback(result);
-            }
-        });
-    }else{
-        throw "invalid instock to total ratio!";
-    }
+    var sql = "INSERT INTO items(name,instock,total,description,signed_out_by) VALUES("+"\""+obj.name+"\""+"," +obj.instock +"," + obj.total +"," +"\""+obj.description+"\""+"," + "\""+obj.signed_out_by+"\"" +")";
+    db.query(sql , function(err,result){
+        if(err){
+            console.log(err);
+        }else{
+            return callback(result);
+        }
+    });
     
 }
 
@@ -50,8 +45,8 @@ exports.findById = function(itemid, callback){
     });
 }
 
-exports.findByName = function(itemName, callback){
-    var sql = `SELECT * FROM items WHERE name LIKE "%` + [itemName] + `%"`;
+exports.findByName = function(itemName, offset, callback){
+    var sql = `SELECT * FROM items WHERE name LIKE "%` + [itemName] + `%" LIMIT ` + offset + `,50`;
 
     db.query(sql,function(err,result){
         if (err){

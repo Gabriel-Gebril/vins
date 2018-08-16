@@ -3,10 +3,16 @@ var express = require("express"),
     faker = require('faker'),
     index = require("./routes/index"),
     db = require("./helpers/db"),
-    item = require("./models/item");
+    item = require("./models/item"),
+    body = require("body-parser");
 
 
 app.set("view engine", "ejs");
+
+app.use(body.urlencoded({
+    extended: true
+}));
+
 app.use(index);
 
 
