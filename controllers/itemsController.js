@@ -21,7 +21,7 @@ exports.itemsGET = function(req, res){
         var num = parseInt(req.query.count);
     }
     
-    items.getItems([num * 50,50],function(result){
+    items.getItems([num * 50,50],function(err,result){
         if (result.length === 0){
             res.redirect("/items/?count=" + (parseInt(req.query.count) - 1));
         }else{
@@ -52,17 +52,26 @@ exports.itemsSearch = function(req,res){
 }
 
 exports.newItem = function(req,res){
-    console.log(req.body);
+
     var itemCon = req.body;
-    var newItem = {
-        name : itemCon.itemName, 
-        instock : itemCon.amount,
-        total : itemCon.amount,
-        description : itemCon.description,
-        signed_out_by : ""
+    var sb = []
+    for (let i = 0; i < itemCon.itemName.length; i++) {
+        sb.push("");
     }
-    items.create(newItem, function(result){
-        res.redirect("/items");
-    });
+        var newItem = {
+            itemName : itemCon.itemName, 
+            instock : itemCon.amount,
+            total : itemCon.amount,
+            description : itemCon.description,
+            signed_out_by : sb
+        }
+        items.createBulk(newItem, function(err,result){
+            if(err){
+                res.send(err);
+            }else{
+                res.redirect("/items");
+            }
+        });
+   
     
 }

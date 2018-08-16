@@ -21,8 +21,12 @@
     </div>
 
 <form action="/items" method="POST">
-    <input type="text" name="itemName" placeholder="Name of Item">
-    <input type="text" name="amount" placeholder="Amount added">
+    <input type="text" name="itemName" required placeholder="Name of Item">
+    <input type="text" name="amount" required placeholder="Amount added">
+    <input type="text" name="description" placeholder="Description of item">
+    <br>
+    <input type="text" name="itemName" required placeholder="Name of Item">
+    <input type="text" name="amount" required placeholder="Amount added">
     <input type="text" name="description" placeholder="Description of item">
     <button class="btn btn-success" type="submit">Add Item</button>
 </form>
