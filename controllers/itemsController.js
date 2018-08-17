@@ -22,7 +22,9 @@ exports.itemsGET = function(req, res){
     }
     
     items.getItems([num * 50,50],function(err,result){
-        if (result.length === 0){
+        if(isNaN(parseInt(req.query.count))){
+            res.render("index", {item: result, page :  parseInt(req.query.count), search : ""});
+        }else if (result.length === 0){
             res.redirect("/items/?count=" + (parseInt(req.query.count)-1));
         }else{
             res.render("index", {item: result, page :  parseInt(req.query.count), search : ""});
@@ -44,9 +46,9 @@ exports.itemsSearch = function(req,res){
 
     items.findByName(req.query.q,num*50,function(result){
         if (result.length === 0){
-            res.redirect("/items/search?q=" + req.query.q);
+             res.render("search", {item: result,message : "No item with that name found", page :  parseInt(req.query.count), search : req.query.q});
         }else{
-            res.render("search", {item: result, page :  parseInt(req.query.count), search : req.query.q});
+            res.render("search", {item: result,message : "", page :  parseInt(req.query.count), search : req.query.q});
         }
     })
 }
@@ -73,6 +75,13 @@ exports.newItem = function(req,res){
                 res.redirect("/items");
             }
         });
-   
     
 }
+
+ exports.showItem = function(req,res){
+    var id = req.url;
+    id = parseInt(id.substr(1));
+    items.findById(id,function(err, result){
+        res.render("show",{item:result[0]})
+    });
+ }

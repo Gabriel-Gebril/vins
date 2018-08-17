@@ -19,34 +19,7 @@
     </nav>
 </div>
 
+<h1><%= item.name %></h1>
 
-    <table class="table responsive-table table-striped table-hover">
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>In Stock</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%if(isNaN(page)){%>
-                <%page = 0;%>
-            <%}%>
-            <%for(var i = 0; i<item.length; i++){%>
-            <%function cfl(string) {%>
-                <%return string.charAt(0).toUpperCase() + string.slice(1);%>
-            <%}%>
-        
-            <tr>
-                <td class="showItemBtn" id=<%= item[i].id %>><%= cfl(item[i].name) %></td>
-                <td><%= item[i].instock %></td>
-                <td><%= item[i].total %></td>
-            </tr>
-
-            <%}%>   
-        </tbody>
-    </table>
-
-
-
-<% include partials/footer.ejs %>
+    </body>
+</html>

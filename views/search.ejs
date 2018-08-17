@@ -13,6 +13,7 @@
                         </form>
                         
                     </ul>
+                    
                     <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
                       <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
                       <button class="btn btn-defualt my-2 my-sm-0" type="submit">Search</button>
@@ -43,7 +44,12 @@
     
                 <%}%>   
             </tbody>
+            <%if (message != ""){%>
+                <p id="sMsg"><%= message %></p>
+            <%}%>
+            
         </table>
+        
     
 
 <footer class="footer">

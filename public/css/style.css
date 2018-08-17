@@ -15,6 +15,13 @@ body {
   background: rgb(122,0,60);
 }
 
+.fa-trash{
+  color:white;
+  background: rgb(122,0,60);
+  padding: 8px;
+  border-radius: 10px;
+}
+
 .footer{
   background: rgb(122,0,60);
   height: 15vh;
@@ -100,6 +107,14 @@ img{
     height: 70px;
 }
 
+#sMsg{
+  text-align: center;
+  display: block;
+  margin-top: 2%;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 #addForm{
   list-style: none;
   margin: auto;
@@ -109,25 +124,33 @@ img{
 
 #addForm li input{
   display: block;
-  margin: 0;
+  margin: 5px;
   width: 100%; height: 40px;
   line-height: 40px; font-size: 17px;
   border: 1px solid #bbb;
+  text-transform: capitalize; 
+}
+
+#addForm li{
+  margin-right: 5px;
 }
 
 #cbox {
 	resize: none;
-	width: 100%;
+  width: 100%;
+  margin: 5px;
 	min-height: 40px;
 	padding: 5px;
 	overflow: hidden;
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #moreItems{
   float: left;
+  margin: 5px;
 }
 
 #commitItems{
   float: right;
+  margin-top: 5px;
 }

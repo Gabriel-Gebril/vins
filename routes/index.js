@@ -4,6 +4,7 @@ var express = require("express"),
 
 router.use(express.static('./public'));
 router.use(express.static('./controllers'));
+router.use(express.static("./node_modules"))
 
 router.get("/", function(req,res){
     res.redirect("/items");

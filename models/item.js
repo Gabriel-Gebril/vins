@@ -41,14 +41,14 @@ exports.createBulk = function(obj,callback){
     if(Array.isArray(obj.itemName)){
         for (let i = 0; i < obj.itemName.length; i++) {
             if(i<(obj.itemName.length-1)){
-                values += "("+"\""+obj.itemName[i]+"\""+"," +obj.instock[i] +"," + obj.total[i] +"," +"\""+obj.description[i]+"\""+"," + "\""+obj.signed_out_by[i]+"\"" +"," +"\""+ obj.location[i]+"\"" +"),"
+                values += "("+"\""+obj.itemName[i].toLowerCase()+"\""+"," +obj.instock[i] +"," + obj.total[i] +"," +"\""+obj.description[i]+"\""+"," + "\""+obj.signed_out_by[i]+"\"" +"," +"\""+ obj.location[i]+"\"" +"),"
             }else{
-                values += "("+"\""+obj.itemName[i]+"\""+"," +obj.instock[i] +"," + obj.total[i] +"," +"\""+obj.description[i]+"\""+"," + "\""+obj.signed_out_by[i]+"\"" +"," +"\""+ obj.location[i]+"\"" +")"
+                values += "("+"\""+obj.itemName[i].toLowerCase()+"\""+"," +obj.instock[i] +"," + obj.total[i] +"," +"\""+obj.description[i]+"\""+"," + "\""+obj.signed_out_by[i]+"\"" +"," +"\""+ obj.location[i]+"\"" +")"
             }
             
         }
     }else{
-        values += "("+"\""+obj.itemName+"\""+"," +obj.instock +"," + obj.total +"," +"\""+obj.description+"\""+"," + "\""+obj.signed_out_by+"\"" +"," +"\""+ obj.location+"\"" +")"
+        values += "("+"\""+obj.itemName.toLowerCase()+"\""+"," +obj.instock +"," + obj.total +"," +"\""+obj.description+"\""+"," + "\""+obj.signed_out_by+"\"" +"," +"\""+ obj.location+"\"" +")"
     }
     
 
@@ -62,12 +62,8 @@ exports.createBulk = function(obj,callback){
 exports.findById = function(itemid, callback){
     var sql = "SELECT * FROM items WHERE id LIKE " + itemid;
 
-    db.query(sql,function(err,result, fields){
-        if (err){
-            console.log(err);
-        }else{
-           return callback(result);
-        }
+    db.query(sql,function(err,result){
+        return callback(err, result);
     });
 }
 

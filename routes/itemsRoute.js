@@ -12,5 +12,6 @@ router.get("/new", function(req,res){
 
 router.post("/", items.newItem)
 
+router.get("/:id", items.showItem);
 
 module.exports = router;
