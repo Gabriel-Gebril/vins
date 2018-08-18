@@ -56,25 +56,30 @@ exports.itemsSearch = function(req,res){
 exports.newItem = function(req,res){
 
     var itemCon = req.body;
-    var sb = []
-    for (let i = 0; i < itemCon.itemName.length; i++) {
-        sb.push("");
-    }
-        var newItem = {
-            itemName : itemCon.itemName, 
-            instock : itemCon.amount,
-            total : itemCon.amount,
-            description : itemCon.description,
-            signed_out_by : sb,
-            location : itemCon.location
+    if (Array.isArray(itemCon.name)){
+        var sb = [];
+        for (let i = 0; i < itemCon.itemName.length; i++) {
+            sb.push("");
         }
-        items.createBulk(newItem, function(err,result){
-            if(err){
-                res.send(err);
-            }else{
-                res.redirect("/items");
-            }
-        });
+    }else{
+        var sb = "";
+    }
+    
+    var newItem = {
+        itemName : itemCon.itemName, 
+        instock : itemCon.amount,
+        total : itemCon.amount,
+        description : itemCon.description,
+        signed_out_by : sb,
+        location : itemCon.location
+    }
+    items.createBulk(newItem, function(err,result){
+        if(err){
+            res.send(err);
+        }else{
+            res.redirect("/items");
+        }
+    });
     
 }
 
@@ -84,4 +89,16 @@ exports.newItem = function(req,res){
     items.findById(id,function(err, result){
         res.render("show",{item:result[0]})
     });
+ }
+
+ exports.deleteItem = function(req, res){
+     var id = req.url;
+     id = parseInt(id.substr(1));
+     items.removeById(id, function(err, result){
+        if (err){
+            console.log(err);
+        }else{
+            res.redirect("/items");
+        }
+     })
  }

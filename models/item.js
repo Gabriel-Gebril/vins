@@ -87,3 +87,10 @@ exports.getItems = function(startStop, callback){
         
     });
 }
+
+exports.removeById = function(id, callback){
+    var sql =  `DELETE FROM items WHERE id=` + id;
+    db.query(sql, function(err,result){
+        return callback(err,result);
+    });
+}

@@ -4,7 +4,8 @@ var express = require("express"),
     index = require("./routes/index"),
     db = require("./helpers/db"),
     item = require("./models/item"),
-    body = require("body-parser");
+    body = require("body-parser"),
+    methodOverride = require("method-override");
 
 
 app.set("view engine", "ejs");
@@ -13,6 +14,7 @@ app.use(body.urlencoded({
     extended: true
 }));
 
+app.use(methodOverride("_method"));
 
 app.use(index);
 

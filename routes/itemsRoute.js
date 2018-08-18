@@ -14,4 +14,6 @@ router.post("/", items.newItem)
 
 router.get("/:id", items.showItem);
 
+router.delete("/:id", items.deleteItem)
+
 module.exports = router;

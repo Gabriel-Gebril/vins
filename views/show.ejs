@@ -71,7 +71,10 @@
 
             <h3>Location</h3>
             <p><%= item.location %></p>
-            <button id="deleteBtn" class="btn btn-danger" type="submit">Delete</button>
+            <form action="/items/<%= item.id %>?_method=Delete" method="POST">
+                <button id="deleteBtn" class="btn btn-danger" type="submit">Delete</button>
+            </form>
+            
             <button id="editBtn" type="button" class="btn btn-success"><i class="fas fa-edit"></i>   Edit</button>
             
         </div>
