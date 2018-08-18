@@ -1,0 +1,50 @@
+.container{
+    background-color: rgba(142, 151, 157, 0.1);
+    border-radius: 10px;
+    padding-bottom: 60px;
+    padding-top: 25px;
+    text-align: center;
+}
+
+h1{
+    text-transform: capitalize;
+}
+
+#tDis{
+    display: block;
+    float: left;
+}
+
+#cbox {
+	resize: none;
+  width: 100%;
+  margin: 5px;
+	min-height: 40px;
+	padding: 5px;
+	overflow: hidden;
+  box-sizing: border-box;
+}
+.tr{
+    text-align: center;
+}
+
+.table{
+    width: 30px;
+}
+
+.container>.container{
+    background-color: rgba(142, 151, 157, 0.0);
+    padding: 0 25%;
+}
+
+.oddOne{
+    text-align: right;
+}
+
+#deleteBtn{
+    float: left;
+}
+
+#editBtn{
+    float: right;
+}

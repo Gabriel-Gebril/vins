@@ -1,25 +1,81 @@
-<% include partials/header.ejs %>
-<div id="container">
-    <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
-        <a class="navbar-brand" href="http://localhost:3000"><img id="vLogo" src="/img/VentureLogo.png"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <form action="/items/new" method="GET">
-                        <li><button class="btn btn-defualt my-2 my-sm-0" type="submit">Add Item</button></li>
-                    </form>
-                </ul>
-                <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
-                  <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
-                  <button class="btn btn-defualt my-2 my-sm-0" type="submit">Search</button>
-                </form>
-              </div>
-    </nav>
-</div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Venture Inventory</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/showStyle.css" >
+        <link rel="stylesheet" type="text/css" href="/vendor/fontawesome/css/fontawesome.min.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/brands.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/solid.css">
+        <script src="/libs/jquery-3.3.1.min.js"></script>
+        <script src="/libs/bootstrap.bundle.min.js"></script>
+        
+    </head>
+    <body>
+        <% include partials/header.ejs %>
+        <div id="container">
+            <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+                <a class="navbar-brand" href="http://localhost:3000"><img id="vLogo" src="/img/VentureLogo.png"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <form action="/items/new" method="GET">
+                                <li><button class="btn btn-defualt my-2 my-sm-0" type="submit">Add Item</button></li>
+                            </form>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
+                        <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
+                        <button class="btn btn-defualt my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+            </nav>
+        </div>
 
-<h1><%= item.name %></h1>
+        <div class="container">
+            <h1><%= item.name %></h1>
+            <div class="row">
+                <h3 class="col-sm">In stock: <%= item.instock %> </h3>
+                <h3 class="col-sm">Total: <%= item.total %></h3>
+            </div>
+           
+            
+            <h3>Description</h3>
+            <p><%= item.description %></p>
+            <h3>Signed Out By</h3>
+
+            <div class="container">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Person</th>
+                            <th class="oddOne">Qauntity</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td class="oddOne">Num</td>
+                            <td>Camp</td>
+                        </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+            
+
+            <h3>Location</h3>
+            <p><%= item.location %></p>
+            <button id="deleteBtn" class="btn btn-danger" type="submit">Delete</button>
+            <button id="editBtn" type="button" class="btn btn-success"><i class="fas fa-edit"></i>   Edit</button>
+            
+        </div>
+
 
     </body>
 </html>
