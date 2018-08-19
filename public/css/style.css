@@ -1,6 +1,9 @@
 body {
   padding-top: 120px;
 }
+html{
+  background: rgb(122,0,60);
+}
 #pPage{
   float: left;
   margin: 10px;
@@ -139,6 +142,7 @@ img{
 	resize: none;
   width: 100%;
   margin: 5px;
+  margin-bottom: 60px;
 	min-height: 40px;
 	padding: 5px;
 	overflow: hidden;
@@ -157,8 +161,4 @@ img{
 
 #addForm li .dupItemc {
   box-shadow: 0 0 3px #ff0000;
-}
-
-#addForm li .dupItemc:hover{
-  
 }

@@ -15,7 +15,7 @@ router.get("/new", function(req,res){
         signed_out_by : "",
         location : ""
     }
-    res.render("newItem", {items : newItems, nItems : 1});
+    res.render("newItem", {items : newItems, nItems : 1, dupItem : "0"});
 });
 
 router.post("/", items.newItem)
