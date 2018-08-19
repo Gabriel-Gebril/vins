@@ -36,8 +36,11 @@
                     <%page = 0;%>
                 <%}%>
                 <%for(var i = 0; i<item.length; i++){%>
+                    <%function cfl(string) {%>
+                        <%return string.charAt(0).toUpperCase() + string.slice(1);%>
+                    <%}%>
                 <tr>
-                    <td><%= item[i].name %></td>
+                        <td class="showItemBtn" id=<%= item[i].id %>><%= cfl(item[i].name) %></td>
                     <td><%= item[i].instock %></td>
                     <td><%= item[i].total %></td>
                 </tr>
