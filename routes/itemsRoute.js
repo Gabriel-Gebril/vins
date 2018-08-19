@@ -7,7 +7,15 @@ router.get("/", items.itemsGET);
 router.get("/search", items.itemsSearch);
 
 router.get("/new", function(req,res){
-    res.render("newItem");
+    var newItems = {
+        itemName : "", 
+        instock : "",
+        total : "",
+        description : "",
+        signed_out_by : "",
+        location : ""
+    }
+    res.render("newItem", {items : newItems, nItems : 1});
 });
 
 router.post("/", items.newItem)

@@ -154,3 +154,11 @@ img{
   float: right;
   margin-top: 5px;
 }
+
+#addForm li .dupItemc {
+  box-shadow: 0 0 3px #ff0000;
+}
+
+#addForm li .dupItemc:hover{
+  
+}

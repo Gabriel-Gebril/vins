@@ -40,13 +40,42 @@
 <form action="/items" method="POST">
     <div class="container" id="fContainer">
         <ul id="addForm">
-            <li>
-                <h3>Item #1 <span class="trash"><i class="fa fa-trash"></i></span> </h3>
-                <input type="text" name="itemName" required placeholder="Name of item" autocomplete="off">
-                <input type="number" name="amount" required placeholder="Amount added" min=1>
-                <input type="text" name="location" required placeholder="Location of item" autocomplete="off">
-                <textarea id="cbox" type="text" name="description" placeholder="Description of Item"></textarea>
-            </li>
+            <%if (nItems === 1){%>
+
+                <%if (dupItem === items.itemName.toLowerCase()){%>
+                        
+                    <%var c = 'class=dupItemc';%>
+                <%}else{ %>
+                    <%var c = "";%>
+                <%}%>
+
+                    <li>
+                        <h3>Item #<%= 1%> <span class="trash"><i class="fa fa-trash"></i></span> </h3>
+                        <input type="text" name="itemName" <%= c %> value="<%= items.itemName %>" required placeholder="Name of item" autocomplete="off">
+                        <input type="number" name="amount" value="<%= items.total %>" required placeholder="Amount added" min=1>
+                        <input type="text" name="location" value="<%= items.location %>" required placeholder="Location of item" autocomplete="off">
+                        <textarea id="cbox" type="text" name="description" value="<%= items.description %>" placeholder="Description of Item"></textarea>
+                    </li>
+            <%}else{%>
+                
+                <%for (var i = 0; i < nItems; i++){%>
+                    <%if (dupItem === items.itemName[i].toLowerCase()){%>
+                        
+                        <%var c = 'class=dupItemc';%>
+                    <%}else{ %>
+                        <%var c = "";%>
+                    <%}%>
+                    <li>
+                        <h3>Item #<%= i+1%> <span class="trash"><i class="fa fa-trash"></i></span> </h3>
+                        <input type="text" name="itemName" <%= c %> value="<%= items.itemName[i] %>" required placeholder="Name of item" autocomplete="off">
+                        <input type="number" name="amount" value="<%= items.total[i] %>" required placeholder="Amount added" min=1>
+                        <input type="text" name="location" value="<%= items.location[i] %>" required placeholder="Location of item" autocomplete="off">
+                        <textarea id="cbox" type="text" name="description" value="<%= items.description[i] %>" placeholder="Description of Item"></textarea>
+                    </li>
+                <%}%>
+            <%}%>
+            
+            
 
         </ul>
         <button id="moreItems" type="button" class="btn btn-info"><i class="fas fa-plus"></i>   Add another Item</button>

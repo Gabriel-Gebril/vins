@@ -65,7 +65,7 @@ exports.newItem = function(req,res){
         var sb = "";
     }
     
-    var newItem = {
+    var newItems = {
         itemName : itemCon.itemName, 
         instock : itemCon.amount,
         total : itemCon.amount,
@@ -73,9 +73,20 @@ exports.newItem = function(req,res){
         signed_out_by : sb,
         location : itemCon.location
     }
-    items.createBulk(newItem, function(err,result){
+    items.createBulk(newItems, function(err,result){
         if(err){
-            res.send(err);
+            if(Array.isArray(newItems.total)){
+                n = newItems.total.length;
+            }else{
+                n = 1;
+            }
+            
+
+        function getPosition(string, subString, index) {
+            return string.split(subString, index).join(subString).length;
+        }
+        var errI = err.sqlMessage.slice(17,getPosition(err.sqlMessage,"\'",2));
+            res.render("newItem", {items : newItems, nItems : n, dupItem : errI});
         }else{
             res.redirect("/items");
         }
