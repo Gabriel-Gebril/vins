@@ -56,10 +56,17 @@
                 <br>
                 <button id="editBtn" type="submit" class="btn btn-success">   Confirm</button>
                 
+                
             </form>
+            
+            
             <form action="/items/<%= item.id %>?_method=Delete" method="POST">
                 <button id="deleteBtn" class="btn btn-danger" type="submit">Delete</button>
             </form>
+            <form action="/items/<%= item.id %>" method="GET">
+                <button id="CancelBtn" class="btn btn-info" type="submit">Cancel</button>
+            </form>
+            
             
             
         </div>
