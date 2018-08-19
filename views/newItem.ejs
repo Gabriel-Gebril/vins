@@ -69,7 +69,7 @@
                         <h3>Item #<%= i+1%> <span class="trash"><i class="fa fa-trash"></i></span> </h3>
                         <input type="text" name="itemName" <%= c %> value="<%= items.itemName[i] %>" required placeholder="Name of item" autocomplete="off">
                         <input type="number" name="amount" value="<%= items.total[i] %>" required placeholder="Amount added" min=1>
-                        <input type="text" name="location" value="<%= items.location[i] %>" required placeholder="Location of item" autocomplete="off">
+                        <input type="text" name="location" value="<%= items.location[i] %>" required placeholder="Location of Item" autocomplete="off">
                         <textarea id="cbox" type="text" name="description" value="<%= items.description[i] %>" placeholder="Description of Item"></textarea>
                     </li>
                 <%}%>

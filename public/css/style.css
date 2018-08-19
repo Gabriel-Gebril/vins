@@ -134,6 +134,9 @@ img{
   text-transform: capitalize; 
 }
 
+#addForm li input[name="location"]{
+  text-transform: none;
+}
 #addForm li{
   margin-right: 5px;
 }

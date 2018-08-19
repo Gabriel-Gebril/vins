@@ -1,3 +1,7 @@
+body {
+    padding-top: 120px;
+}
+
 .container{
     background-color: rgba(142, 151, 157, 0.1);
     border-radius: 10px;
@@ -28,18 +32,14 @@ h1{
     text-align: center;
 }
 
-.table{
-    width: 30px;
-}
-
 .container>.container{
     background-color: rgba(142, 151, 157, 0.0);
-    padding: 0 25%;
-}
+    padding: 0 15%;
+} 
 
-.oddOne{
+/* .oddOne{
     text-align: right;
-}
+} */
 
 #deleteBtn{
     float: left;
@@ -49,3 +49,94 @@ h1{
     float: right;
 }
 
+.navbar {
+  height: 50px;
+  padding: 0 15px 0px 15px;
+  width: 100%;
+  top: 0px;
+  position: fixed;
+  z-index: 1;
+  background: rgb(122,0,60);
+}
+
+
+.navbar {margin-bottom: 0;}
+
+.navbar a {
+  color: white;
+  line-height: 3em;
+}
+
+.navbar-collapse{
+  background: rgb(122,0,60);
+  margin: -.5rem -1rem;
+  padding: .5rem 1rem;
+}
+
+
+.navbar {
+    min-height: 80px;
+}
+  
+.navbar-brand {
+padding: 0 15px;
+height: 80px;
+line-height: 80px;
+}
+  
+.navbar-toggle {
+  /* (80px - button height 34px) / 2 = 23px */
+  margin-top: 23px;
+  padding: 9px 10px !important;
+}
+
+img{
+    height: 70px;
+}
+
+#addForm{
+    list-style: none;
+    margin: auto;
+    padding: 0;
+    text-align: center;
+  }
+  
+ input{
+    text-transform: capitalize; 
+  }
+
+  input[name="location"]{
+    text-transform: none; 
+  }
+  
+  
+  #cbox {
+      resize: none;
+    width: 100%;
+    margin: 5px;
+    margin-bottom: 60px;
+      min-height: 40px;
+      padding: 5px;
+      overflow: hidden;
+    box-sizing: border-box;
+  }
+  
+  #moreItems{
+    float: left;
+    margin: 5px;
+  }
+  
+  #commitItems{
+    float: right;
+    margin-top: 5px;
+  }
+  
+  #addForm li .dupItemc {
+    box-shadow: 0 0 3px #ff0000;
+  }
+
+  
+ 
+  
+
+  

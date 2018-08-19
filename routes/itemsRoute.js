@@ -12,7 +12,6 @@ router.get("/new", function(req,res){
         instock : "",
         total : "",
         description : "",
-        signed_out_by : "",
         location : ""
     }
     res.render("newItem", {items : newItems, nItems : 1, dupItem : "0"});
@@ -21,6 +20,10 @@ router.get("/new", function(req,res){
 router.post("/", items.newItem)
 
 router.get("/:id", items.showItem);
+
+router.get("/:id/edit", items.showEdit)
+
+router.put("/:id", items.editItem)
 
 router.delete("/:id", items.deleteItem)
 

@@ -8,7 +8,6 @@ var createItems = `CREATE TABLE IF NOT EXISTS items(
                         instock INT NOT NULL,
                         total INT NOT NULL,
                         description TEXT,
-                        signed_out_by VARCHAR(255),
                         location VARCHAR(255) NOT NULL,
                         PRIMARY KEY (id),
                         UNIQUE (name)
@@ -36,19 +35,19 @@ db.query(createItems,function(err,result){
 // }
 
 exports.createBulk = function(obj,callback){
-    var sql = "INSERT INTO items(name,instock,total,description,signed_out_by,location) VALUES";
+    var sql = "INSERT INTO items(name,instock,total,description,location) VALUES";
     var values = "";
     if(Array.isArray(obj.itemName)){
         for (let i = 0; i < obj.itemName.length; i++) {
             if(i<(obj.itemName.length-1)){
-                values += "("+"\""+obj.itemName[i].toLowerCase()+"\""+"," +obj.instock[i] +"," + obj.total[i] +"," +"\""+obj.description[i]+"\""+"," + "\""+obj.signed_out_by[i]+"\"" +"," +"\""+ obj.location[i]+"\"" +"),"
+                values += "("+"\""+obj.itemName[i].toLowerCase()+"\""+"," +obj.instock[i] +"," + obj.total[i] +"," +"\""+obj.description[i]+"\""+","  +"\""+ obj.location[i]+"\"" +"),"
             }else{
-                values += "("+"\""+obj.itemName[i].toLowerCase()+"\""+"," +obj.instock[i] +"," + obj.total[i] +"," +"\""+obj.description[i]+"\""+"," + "\""+obj.signed_out_by[i]+"\"" +"," +"\""+ obj.location[i]+"\"" +")"
+                values += "("+"\""+obj.itemName[i].toLowerCase()+"\""+"," +obj.instock[i] +"," + obj.total[i] +"," +"\""+obj.description[i]+"\""+","  +"\""+ obj.location[i]+"\"" +")"
             }
             
         }
     }else{
-        values += "("+"\""+obj.itemName.toLowerCase()+"\""+"," +obj.instock +"," + obj.total +"," +"\""+obj.description+"\""+"," + "\""+obj.signed_out_by+"\"" +"," +"\""+ obj.location+"\"" +")"
+        values += "("+"\""+obj.itemName.toLowerCase()+"\""+"," +obj.instock +"," + obj.total +"," +"\""+obj.description+"\"" +"," +"\""+ obj.location+"\"" +")"
     }
     
 
@@ -91,6 +90,20 @@ exports.getItems = function(startStop, callback){
 exports.removeById = function(id, callback){
     var sql =  `DELETE FROM items WHERE id=` + id;
     db.query(sql, function(err,result){
+        return callback(err,result);
+    });
+}
+
+exports.update = function(itemObj, callback){
+    var sql = `UPDATE items SET name=` 
+    + "\"" + itemObj.name + "\""
+    + `, instock=` + itemObj.instock
+    + `, total=` +  itemObj.total 
+    + `, description=` + "\"" + itemObj.description + "\""
+    + `, location=` + "\"" + itemObj.location + "\""
+    + ` WHERE id=` + itemObj.id; 
+
+    db.query(sql,function(err, result){
         return callback(err,result);
     });
 }

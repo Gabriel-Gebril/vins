@@ -37,48 +37,33 @@
         </div>
 
         <div class="container">
-            <h1><%= item.name %></h1>
-            <div class="row">
-                <h3 class="col-sm">In stock: <%= item.instock %> </h3>
-                <h3 class="col-sm">Total: <%= item.total %></h3>
-            </div>
-           
-            
-            <h3>Description</h3>
-            <p><%= item.description %></p>
-            <h3>Signed Out By</h3>
 
-            <div class="container">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Person</th>
-                            <th>Qauntity</th>
-                            <th>Reason</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Name</td>
-                            <td>Num</td>
-                            <td>Camp</td>
-                        </tr>
-    
-                    </tbody>
-                </table>
-            </div>
+            <form action="/items/<%= item.id %>?_method=Put" method="POST">
+                <h1>Name: <input type="text"  name="name" value="<%= item.name %>" required placeholder="Name of item" autocomplete="off"></h1>
+                <p><%= msg %></p>
+                <div class="row">
+                    <h3 class="col-sm">In stock: <input type="number" name="instock" value="<%= item.instock %>" required placeholder="Amount added" min=1> </h3>
+                    <h3 class="col-sm">Total: <input type="number" name="total" value="<%= item.total %>" required placeholder="Amount added" min=1></h3>
+                </div>
             
+                
+                <h3>Description</h3>
+                <textarea id="cbox" type="text" name="description" placeholder="Description of Item"><%= item.description %></textarea>
 
-            <h3>Location</h3>
-            <p><%= item.location %></p>
-            
-            <form action="/items/<%= item.id %>/edit" method="GET">
-                <button id="editBtn" type="submit" class="btn btn-success"><i class="fas fa-edit"></i>   Edit</button>
+                <!-- TODO: Allow for the change of who has what of what quantity for what reason -->
+                <h3>Location</h3>
+                <input type="text" name="location" value="<%= item.location %>" required placeholder="Location of item" autocomplete="off">
+                <br>
+                <button id="editBtn" type="submit" class="btn btn-success">   Confirm</button>
+                
+            </form>
+            <form action="/items/<%= item.id %>?_method=Delete" method="POST">
+                <button id="deleteBtn" class="btn btn-danger" type="submit">Delete</button>
             </form>
             
             
         </div>
-        
+        <div class="spacer">
             
         </div>
 

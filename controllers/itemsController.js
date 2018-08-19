@@ -56,25 +56,17 @@ exports.itemsSearch = function(req,res){
 exports.newItem = function(req,res){
 
     var itemCon = req.body;
-    if (Array.isArray(itemCon.name)){
-        var sb = [];
-        for (let i = 0; i < itemCon.itemName.length; i++) {
-            sb.push("");
-        }
-    }else{
-        var sb = "";
-    }
     
     var newItems = {
         itemName : itemCon.itemName, 
         instock : itemCon.amount,
         total : itemCon.amount,
         description : itemCon.description,
-        signed_out_by : sb,
         location : itemCon.location
     }
     items.createBulk(newItems, function(err,result){
         if(err){
+            console.log(err);
             if(Array.isArray(newItems.total)){
                 n = newItems.total.length;
             }else{
@@ -113,3 +105,43 @@ exports.newItem = function(req,res){
         }
      })
  }
+
+ exports.showEdit = function(req,res){
+    var id = req.url;
+    id = parseInt(id.substr(1));
+    items.findById(id,function(err, result){
+        res.render("editItem",{item:result[0],msg : ""})
+    });
+ }
+
+ exports.editItem = function(req,res){
+
+    function getPosition(string, subString, index) {
+        return string.split(subString, index).join(subString).length;
+    }
+    var Iid = req.url.substr(1);
+    console.log(getPosition(Iid, "?_method", 1));
+    Iid = Iid.substring(0,getPosition(Iid, "?_method", 1));
+    Iid = parseInt(Iid);
+
+    var itemCon = req.body;
+    console.log(itemCon);
+    
+    var newItem = {
+        id : Iid,
+        name : itemCon.name, 
+        instock : itemCon.instock,
+        total : itemCon.total,
+        description : itemCon.description,
+        location : itemCon.location
+    }
+    items.update(newItem, function(err,result){
+        if(err){
+            var errI = err.sqlMessage.slice(17,getPosition(err.sqlMessage,"\'",2));
+            res.render("editItem", {item : newItem, msg : "Item " + errI + " already in database! Please choose another name or edit the existing item!"});
+        }else{
+            res.redirect("/items/"+newItem.id);
+        }
+    });
+    
+}
