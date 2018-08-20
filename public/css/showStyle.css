@@ -141,6 +141,19 @@ img{
     box-shadow: 0 0 3px #ff0000;
   }
 
+  .spacer{
+      padding: 15px;
+  }
+  #qAdd{
+      float: left;
+      margin-top: 2px;
+      
+  }
+  #addBtnShow{
+      float: left;
+      
+      margin-right: 10px;
+  }
   
  
   

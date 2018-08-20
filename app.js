@@ -1,14 +1,21 @@
 var express = require("express"),
     app = express(),
-    faker = require('faker'),
     index = require("./routes/index"),
-    db = require("./helpers/db"),
-    item = require("./models/item"),
     body = require("body-parser"),
-    methodOverride = require("method-override");
+    methodOverride = require("method-override"),
+    authRoutes = require('./routes/authRoutes'),
+    passportSetup = require('./config/passport-setup'),
+    passport = require("passport");
 
+app.use(require("express-session")({
+    secret: "I hope this is okay",
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.set("view engine", "ejs");
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(body.urlencoded({
     extended: true
@@ -16,34 +23,9 @@ app.use(body.urlencoded({
 
 app.use(methodOverride("_method"));
 
+app.use('/auth',authRoutes);
+
 app.use(index);
-
-
-
-// var newI = {
-//     name: "test item j",
-//     instock: 5,
-//     total: 500,
-//     description: "awesome item",
-//     signed_out_by: "Gabriel"
-// }
-
-// item.create(newI, function(result){
-//     console.log(result);
-// });
-
-// for (let index = 0; index < 100; index++) {
-//     item.createBulk({
-//         name: "Test Item" + (index+1),
-//         instock: index,
-//         total: index + 100,
-//         description: "",
-//         signed_out_by: ""
-//     }, function(result){
-
-//     });
-    
-// }
 
 
 

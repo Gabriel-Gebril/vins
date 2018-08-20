@@ -90,7 +90,7 @@ exports.newItem = function(req,res){
     var id = req.url;
     id = parseInt(id.substr(1));
     items.findById(id,function(err, result){
-        res.render("show",{item:result[0]})
+        res.render("show",{item:result[0]});
     });
  }
 
@@ -144,4 +144,26 @@ exports.newItem = function(req,res){
         }
     });
     
+}
+
+exports.addToItem = function(req,res){
+    function getPosition(string, subString, index) {
+        return string.split(subString, index).join(subString).length;
+    }
+    var Iid = req.url.substr(1);
+    console.log(getPosition(Iid, "?_method", 1));
+    Iid = Iid.substring(0,getPosition(Iid, "?_method", 1));
+    Iid = parseInt(Iid);
+
+    var itemCon = req.body;
+    items.findById(Iid,function(err,result){
+        if (err){
+            return res.render("show",{item:result[0]});
+        }
+        result[0].total = parseInt(result[0].total)+parseInt(itemCon.amount);
+        result[0].instock = parseInt(result[0].instock)+parseInt(itemCon.amount);
+        items.update(result[0], function(err,result){
+            res.redirect("/items/"+Iid);
+        });
+    });
 }
