@@ -1,6 +1,7 @@
 var express = require("express"),
     app = express(),
     index = require("./routes/index"),
+    user = require("./routes/usersRoute"),
     body = require("body-parser"),
     methodOverride = require("method-override"),
     authRoutes = require('./routes/authRoutes'),
@@ -26,7 +27,7 @@ app.use(methodOverride("_method"));
 app.use('/auth',authRoutes);
 
 app.use(index);
-
+app.use("/users",user);
 
 
 app.listen(3000,function(){

@@ -1,0 +1,68 @@
+<% include ../partials/header.ejs %>
+
+<div id="container">
+        <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+            <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        
+                    </ul>
+                    
+                    <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
+                      <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
+                      <button class="btn btn-defualt my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                  </div>
+        </nav>
+    </div>
+    
+    
+        <table class="table responsive-table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>In Stock</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%if(isNaN(page)){%>
+                    <%page = 0;%>
+                <%}%>
+                <%for(var i = 0; i<item.length; i++){%>
+                    <%function cfl(string) {%>
+                        <%return string.charAt(0).toUpperCase() + string.slice(1);%>
+                    <%}%>
+                <tr>
+                        <td class="showItemBtn" id=<%= item[i].id %>><%= cfl(item[i].name) %></td>
+                    <td><%= item[i].instock %></td>
+                    <td><%= item[i].total %></td>
+                </tr>
+    
+                <%}%>   
+            </tbody>
+            <%if (message != ""){%>
+                <p id="sMsg"><%= message %></p>
+            <%}%>
+            
+        </table>
+        
+    
+
+<footer class="footer">
+        <form action="/items/search" method="GET">
+            <input type="hidden" name="q" value= "<%= search %>" >
+            <button class="btn btn-default" name="count" value=<%= page + 1%> >Next Page</button>
+        </form>
+  
+        <form action="/items/search" method="GET">
+            <input type="hidden" name="q" value= "<%= search %>" > 
+            <button class="btn btn-default" name="count" id="pPage" value=<%= page - 1%> >Previous Page</button>
+        </form>
+          
+      </footer>
+    </body>
+  </html>

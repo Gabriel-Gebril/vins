@@ -9,11 +9,44 @@ var authCheck = (req,res,next) => {
     res.redirect("/auth/google");
 };
 
-router.get("/", authCheck , items.itemsGET);
+var isInstructor = (req,res,next) => {
+    if(req.isAuthenticated() && (req.user.role === "admin" || req.user.role === "cc" || req.user.role === "instructor")){
+        return next();
+    }else if(!req.isAuthenticated()){
+        return res.redirect("/auth/google");
+    }
+    res.redirect("/accessDenied");
+}
 
-router.get("/search", items.itemsSearch);
+var isAdmin = (req,res,next) => {
+    console.log(req.user.role);
+    if(req.isAuthenticated() && req.user.role === "admin"){
+        return next();
+    }else if(!req.isAuthenticated()){
+        return res.redirect("/auth/google");
+    }
+    res.redirect("/accessDenied");
+}
 
-router.get("/new", function(req,res){
+var isCC = (req,res,next) => {
+    if(req.isAuthenticated() && (req.user.role === "admin" || req.user.role === "cc")){
+        return next();
+    }else if(!req.isAuthenticated()){
+        return res.redirect("/auth/google");
+    }
+    res.redirect("/accessDenied");
+}
+
+router.get("/", isInstructor , items.itemsGET);
+
+router.get("/search", isInstructor , items.itemsSearch);
+
+router.get("/new", isCC , function(req,res){
+    if(req.user.role === "admin"){
+        var r = "admin/";
+    }else{
+        var r = "cc/"
+    }
     var newItems = {
         itemName : "", 
         instock : "",
@@ -21,19 +54,19 @@ router.get("/new", function(req,res){
         description : "",
         location : ""
     }
-    res.render("newItem", {items : newItems, nItems : 1, dupItem : "0"});
+    res.render(r+"newItem", {items : newItems, nItems : 1, dupItem : "0"});
 });
 
-router.post("/", items.newItem)
+router.post("/", isCC , items.newItem)
 
-router.get("/:id", items.showItem);
+router.get("/:id", isInstructor , items.showItem);
 
-router.get("/:id/edit", items.showEdit);
+router.get("/:id/edit", isAdmin , items.showEdit);
 
-router.put("/:id", items.editItem);
+router.put("/:id",isAdmin , items.editItem);
 
-router.put("/:id/add", items.addToItem);
+router.put("/:id/add", isCC, items.addToItem);
 
-router.delete("/:id", items.deleteItem);
+router.delete("/:id", isAdmin , items.deleteItem);
 
 module.exports = router;

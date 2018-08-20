@@ -25,7 +25,7 @@ passport.use(
                 //Didn't find a user
                 if (resultf1.length === 0){
                     users.createUser({uid : profile._json.id, username : profile._json.displayName, role : ""},function(err,result){
-                        user.find({uid:profile._json.id},function(err,resultf2){
+                        users.find({uid:profile._json.id},function(err,resultf2){
                             done(null,resultf2);
                         });
                     });

@@ -165,3 +165,7 @@ img{
 #addForm li .dupItemc {
   box-shadow: 0 0 3px #ff0000;
 }
+
+#uBtn{
+  margin-left: 10px;
+}

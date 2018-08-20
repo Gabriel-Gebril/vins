@@ -10,6 +10,10 @@ router.get("/", function(req,res){
     res.redirect("/items");
 });
 
+router.get("/accessDenied", function(req,res){
+    res.render("accessDenied");
+});
+
 router.use("/items", items);
 
 module.exports = router;

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Venture Inventory</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/showStyle.css" >
+        <link rel="stylesheet" type="text/css" href="/vendor/fontawesome/css/fontawesome.min.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/brands.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/solid.css">
+        <script src="/libs/jquery-3.3.1.min.js"></script>
+        <script src="/libs/bootstrap.bundle.min.js"></script>
+        <script src="/showAdd.js"></script>
+        
+    </head>
+    <body>
+        <div id="container">
+            <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+                <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <form action="/items/new" method="GET">
+                                <li><button class="btn btn-default my-2 my-sm-0" type="submit">Add Item</button></li>
+                            </form>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0" action="/users/search" method="GET">
+                        <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search Users" aria-label="Search">
+                        <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
+            </nav>
+        </div>
+
+        <div class="container">
+
+            <form action="/users/<%= user.uid %>?_method=Put" method="POST">
+                <div class="row">
+                    <div class="col-sm">
+                        <h3>Username: <input type="text" name="username" value="<%= user.username %>" required placeholder="username" min=1> </h3>
+                    </div>
+                    <div class="col-sm">
+                            <h3>Role: <select name="role"
+                                <%if (editor === user.uid){%>
+                                    disabled = "disabled"
+                                <%}%>
+                                >
+                                    <option value=""
+                                    <%if(user.role === ""){%>
+                                        selected="selected"
+                                    <%}%>
+                                    >None</option>
+                                    <option value="instructor"
+                                    <%if(user.role === "instructor"){%>
+                                        selected="selected"
+                                    <%}%>
+                                    >Instructor</option>
+                                    <option value="CC"
+                                    <%if(user.role === "CC"){%>
+                                        selected="selected"
+                                    <%}%>
+                                    >CC</option>
+                                    <option value="admin"
+                                    <%if(user.role === "admin"){%>
+                                        selected="selected"
+                                    <%}%>
+                                    >Admin</option>
+                                </select> </h3>
+                    </div>
+                   
+                </div>
+                <%if (editor === user.uid){%>
+                    <input type="hidden" name="role" value="<%= user.role %>">
+                <%}%>
+
+                <!-- TODO: Allow for the change of who has what of what quantity for what reason -->
+                <button id="editBtn" type="submit" class="btn btn-success">   Confirm</button>
+                
+                
+            </form>
+            
+            
+            <form action="/users/<%= user.uid %>?_method=Delete" method="POST">
+                <button id="deleteBtn"
+                <%if (editor === user.uid){%>
+                    disabled = "disabled"
+                <%}%> class="btn btn-danger" type="submit">Delete</button>
+            </form>
+            <form action="/users/<%= user.uid %>" method="GET">
+                <button id="CancelBtn" class="btn btn-info" type="submit">Cancel</button>
+            </form>
+            
+            
+            
+        </div>
+        <div class="spacer">
+            
+        </div>
+
+
+    </body>
+</html>

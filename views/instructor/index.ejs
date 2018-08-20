@@ -1,4 +1,4 @@
-<% include partials/header.ejs %>
+<% include ../partials/header.ejs %>
 <div id="container">
     <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
         <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
@@ -7,9 +7,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <form action="/items/new" method="GET">
-                        <li><button class="btn btn-default my-2 my-sm-0" type="submit">Add Item</button></li>
-                    </form>
                 </ul>
                 <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
                 <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
@@ -50,4 +47,4 @@
 
 
 
-<% include partials/footer.ejs %>
+<% include ../partials/footer.ejs %>

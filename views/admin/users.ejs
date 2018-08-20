@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Venture Inventory</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" >
+        <link rel="stylesheet" type="text/css" href="/vendor/fontawesome/css/fontawesome.min.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/brands.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/solid.css">
+        <script src="/libs/jquery-3.3.1.min.js"></script>
+        <script src="/libs/bootstrap.bundle.min.js"></script>
+        <script src="/showUAdd.js"></script>
+        
+    </head>
+    <body>
+<div id="container">
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+        <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <form action="/items/new" method="GET">
+                        <li><button class="btn btn-default my-2 my-sm-0" type="submit">Add Item</button></li>
+                    </form>
+                </ul>
+                <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
+                <form class="form-inline my-2 my-lg-0" action="/users/search" method="GET">
+                  <input class="form-control mr-sm-2" type="q" name="q" paceholder="Users" aria-label="Search">
+                  <button class="btn btn-default my-2 my-sm-0" type="submit">Search Users</button>
+                </form>
+              </div>
+    </nav>
+</div>
+
+
+    <table class="table responsive-table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%if(isNaN(page)){%>
+                <%page = 0;%>
+            <%}%>
+            <%for(var i = 0; i<user.length; i++){%>
+        
+            <tr>
+                <td class="showItemBtn" id=<%= user[i].uid %>><%= user[i].username %></td>
+                <td><%= user[i].role %></td>
+            </tr>
+
+            <%}%>   
+        </tbody>
+    </table>
+
+
+
+<% include ../partials/footer.ejs %>

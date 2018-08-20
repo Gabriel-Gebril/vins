@@ -24,13 +24,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <form action="/items/new" method="GET">
-                                <li><button class="btn btn-default my-2 my-sm-0" type="submit">Add Item</button></li>
-                            </form>
+                
                         </ul>
                         <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
                         <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
-                        <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
+                        <button class="btn btn-defualt my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </div>
             </nav>
@@ -73,15 +71,6 @@
             <p><%= item.location %></p>
 
             
-            
-            <form action="/items/<%= item.id %>/edit" method="GET">
-                <button id="editBtn" type="submit" class="btn btn-success"><i class="fas fa-edit"></i>Edit</button>
-            </form>
-            <form action="/items/<%= item.id %>/add?_method=Put" method="POST">
-                <button id="addBtnShow" type="submit" class="btn btn-primary">Add</button>
-                <input id="qAdd" type="number" name="amount" required placeholder="Qauntity to add" min=1>
-                
-            </form>
             <div class="spacer">
 
             </div>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Venture Inventory</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" >
+        <link rel="stylesheet" type="text/css" href="/vendor/fontawesome/css/fontawesome.min.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/brands.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/solid.css">
+        <script src="/libs/jquery-3.3.1.min.js"></script>
+        <script src="/libs/bootstrap.bundle.min.js"></script>
+        <script src="/formAdd.js"></script>
+        
+    </head>
+    <body>
+
+<div id="container">
+        <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+            <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        
+                        <form action="/users" method="GET">
+                            <li><button id="uBtn" class="btn btn-Info my-2 my-sm-0" type="submit">Manage Users</button></li>
+                        </form>
+                    
+                        
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
+                      <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
+                      <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                  </div>
+        </nav>
+    </div>
+
+<form action="/items" method="POST">
+    <div class="container" id="fContainer">
+        <ul id="addForm">
+            <%if (nItems === 1){%>
+
+                <%if (dupItem === items.itemName.toLowerCase()){%>
+                        
+                    <%var c = 'class=dupItemc';%>
+                <%}else{ %>
+                    <%var c = "";%>
+                <%}%>
+
+                    <li>
+                        <h3>Item #<%= 1%> <span class="trash"><i class="fa fa-trash"></i></span> </h3>
+                        <input type="text" name="itemName" <%= c %> value="<%= items.itemName %>" required placeholder="Name of item" autocomplete="off">
+                        <input type="number" name="amount" value="<%= items.total %>" required placeholder="Amount added" min=1>
+                        <input type="text" name="location" value="<%= items.location %>" required placeholder="Location of item" autocomplete="off">
+                        <textarea id="cbox" type="text" name="description" value="<%= items.description %>" placeholder="Description of Item"></textarea>
+                    </li>
+            <%}else{%>
+                
+                <%for (var i = 0; i < nItems; i++){%>
+                    <%if (dupItem === items.itemName[i].toLowerCase()){%>
+                        
+                        <%var c = 'class=dupItemc';%>
+                    <%}else{ %>
+                        <%var c = "";%>
+                    <%}%>
+                    <li>
+                        <h3>Item #<%= i+1%> <span class="trash"><i class="fa fa-trash"></i></span> </h3>
+                        <input type="text" name="itemName" <%= c %> value="<%= items.itemName[i] %>" required placeholder="Name of item" autocomplete="off">
+                        <input type="number" name="amount" value="<%= items.total[i] %>" required placeholder="Amount added" min=1>
+                        <input type="text" name="location" value="<%= items.location[i] %>" required placeholder="Location of Item" autocomplete="off">
+                        <textarea id="cbox" type="text" name="description" value="<%= items.description[i] %>" placeholder="Description of Item"></textarea>
+                    </li>
+                <%}%>
+            <%}%>
+            
+            
+
+        </ul>
+        <button id="moreItems" type="button" class="btn btn-info"><i class="fas fa-plus"></i>   Add another Item</button>
+        <button id="commitItems" class="btn btn-success" type="submit">Commit changes</button>
+    </div>
+    
+</form>
+
+</body>
+</html>

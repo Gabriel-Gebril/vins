@@ -24,3 +24,42 @@ exports.find = function(obj, callback){
         return callback(err, result);
     });
 }
+
+exports.findByName = function(username,offset,callback){
+    var sql = `SELECT * FROM users WHERE username LIKE "%` + [username] + `%" LIMIT ` + offset + `,50`;
+
+    db.query(sql,function(err,result){
+        if (err){
+            console.log(err);
+        }else{
+           return callback(result);
+        }
+    });
+}
+
+exports.getUsers = function(startStop, callback){
+    var sql = `SELECT * FROM users LIMIT ` + startStop[0] + "," + startStop[1];
+
+    db.query(sql, function(err,result){
+        return callback(err,result);
+    });
+}
+
+exports.update = function(userObj, callback){
+    var sql = `UPDATE users SET username=` 
+    + "\"" + userObj.username + "\""
+    + `, role=` + "\"" + userObj.role + "\""
+    + ` WHERE uid=` + userObj.uid; 
+    console.log(sql);
+    db.query(sql,function(err, result){
+        
+        return callback(err,result);
+    });
+}
+
+exports.removeById = function(uid, callback){
+    var sql =  `DELETE FROM users WHERE uid=` + uid;
+    db.query(sql, function(err,result){
+        return callback(err,result);
+    });
+}

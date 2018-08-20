@@ -20,14 +20,21 @@ exports.itemsGET = function(req, res){
     }else{
         var num = parseInt(req.query.count);
     }
+    if(req.user.role === "instructor"){
+        var r = "instructor/";
+    }else if(req.user.role === "admin"){
+        var r = "admin/";
+    }else{
+        var r = "";
+    }
     
     items.getItems([num * 50,50],function(err,result){
         if(isNaN(parseInt(req.query.count))){
-            res.render("index", {item: result, page :  parseInt(req.query.count), search : ""});
+            res.render(r+"index", {item: result, page :  parseInt(req.query.count), search : ""});
         }else if (result.length === 0){
             res.redirect("/items/?count=" + (parseInt(req.query.count)-1));
         }else{
-            res.render("index", {item: result, page :  parseInt(req.query.count), search : ""});
+            res.render(r+"index", {item: result, page :  parseInt(req.query.count), search : ""});
         }
         
     });
@@ -35,20 +42,43 @@ exports.itemsGET = function(req, res){
 }
 
 exports.itemsSearch = function(req,res){
+    // if (isNaN(parseInt(req.query.count))){
+    //     var num = 0;
+    // }else if(parseInt(req.query.count) <= 0){
+    //     res.redirect("/items");
+    //     return
+    // }else{
+    //     var num = parseInt(req.query.count);
+    // }
+
     if (isNaN(parseInt(req.query.count))){
         var num = 0;
     }else if(parseInt(req.query.count) <= 0){
-        res.redirect("/items");
+        var num = 0;
+        res.redirect("/items/search?q="+req.query.q);
         return
     }else{
         var num = parseInt(req.query.count);
     }
 
+    if(req.user.role === "instructor"){
+        var r = "instructor/";
+    }else{
+        var r = "";
+    }
+
     items.findByName(req.query.q,num*50,function(result){
-        if (result.length === 0){
-             res.render("search", {item: result,message : "No item with that name found", page :  parseInt(req.query.count), search : req.query.q});
+        // if (result.length === 0){
+        //      res.redirect("/items/search?q=" +req.query.q+"&count="+req.query.count);
+        // }else{
+        //     res.render(r+"search", {item: result,message : "", page :  parseInt(req.query.count), search : req.query.q});
+        // }
+        if(isNaN(parseInt(req.query.count))){
+            res.render(r+"search", {item: result, page :  parseInt(req.query.count), message : "", search:req.query.q});
+        }else if (result.length === 0){
+            res.redirect("/items/search?q="+req.query.q+"&count=" + (parseInt(req.query.count)-1));
         }else{
-            res.render("search", {item: result,message : "", page :  parseInt(req.query.count), search : req.query.q});
+            res.render(r+"search", {item: result, page :  parseInt(req.query.count), message : "", search:req.query.q});
         }
     })
 }
@@ -64,6 +94,13 @@ exports.newItem = function(req,res){
         description : itemCon.description,
         location : itemCon.location
     }
+
+    if(req.user.role === "admin"){
+        var r = "admin/";
+    }else{
+        var r = "cc/"
+    }
+
     items.createBulk(newItems, function(err,result){
         if(err){
             console.log(err);
@@ -72,13 +109,12 @@ exports.newItem = function(req,res){
             }else{
                 n = 1;
             }
-            
 
         function getPosition(string, subString, index) {
             return string.split(subString, index).join(subString).length;
         }
         var errI = err.sqlMessage.slice(17,getPosition(err.sqlMessage,"\'",2));
-            res.render("newItem", {items : newItems, nItems : n, dupItem : errI});
+            res.render(r+"newItem", {items : newItems, nItems : n, dupItem : errI});
         }else{
             res.redirect("/items");
         }
@@ -87,10 +123,15 @@ exports.newItem = function(req,res){
 }
 
  exports.showItem = function(req,res){
+    if(req.user.role === "instructor"){
+        var r = "instructor/";
+    }else{
+        var r = "";
+    }
     var id = req.url;
     id = parseInt(id.substr(1));
     items.findById(id,function(err, result){
-        res.render("show",{item:result[0]});
+        res.render(r+"show",{item:result[0]});
     });
  }
 
@@ -108,7 +149,7 @@ exports.newItem = function(req,res){
 
  exports.showEdit = function(req,res){
     var id = req.url;
-    id = parseInt(id.substr(1));
+    id = id.slice(1,getPosition(id,"/edit",1));
     items.findById(id,function(err, result){
         res.render("editItem",{item:result[0],msg : ""})
     });
