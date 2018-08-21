@@ -8,11 +8,24 @@ var express = require("express"),
     passportSetup = require('./config/passport-setup'),
     passport = require("passport");
 
-app.use(require("express-session")({
-    secret: "I hope this is okay",
+var db = require('./helpers/db');
+var session = require('express-session');
+var MySQLStore = require('express-mysql-session')(session);
+
+var sessionStore = new MySQLStore({},db);
+
+app.use(session({
+    key: 'noidea',
+    secret: 'isokay',
+    store: sessionStore,
     resave: false,
     saveUninitialized: false
 }));
+
+app.use(function(req,res,next){
+    res.locals.session = req.session;
+    next();
+});
 
 app.set("view engine", "ejs");
 app.use(passport.initialize());

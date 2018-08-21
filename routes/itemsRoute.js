@@ -63,7 +63,7 @@ router.get("/:id", isInstructor , items.showItem);
 
 router.get("/:id/edit", isAdmin , items.showEdit);
 
-router.put("/:id",isAdmin , items.editItem);
+router.put("/:id",isCC , items.editItem);
 
 router.put("/:id/add", isCC, items.addToItem);
 

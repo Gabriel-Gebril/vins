@@ -2,6 +2,10 @@ var items = require("../models/item"),
     express = require("express"),
     faker = require("faker")
 
+function getPosition(string, subString, index) {
+    return string.split(subString, index).join(subString).length;
+}
+
 exports.itemsGET = function(req, res){
     // var randomProduct = [];
     // for(var i = 0; i<80; i++){
@@ -63,6 +67,8 @@ exports.itemsSearch = function(req,res){
 
     if(req.user.role === "instructor"){
         var r = "instructor/";
+    }else if(req.user.role === "admin"){
+        var r = "admin/";
     }else{
         var r = "";
     }
@@ -110,9 +116,7 @@ exports.newItem = function(req,res){
                 n = 1;
             }
 
-        function getPosition(string, subString, index) {
-            return string.split(subString, index).join(subString).length;
-        }
+        
         var errI = err.sqlMessage.slice(17,getPosition(err.sqlMessage,"\'",2));
             res.render(r+"newItem", {items : newItems, nItems : n, dupItem : errI});
         }else{
@@ -125,6 +129,8 @@ exports.newItem = function(req,res){
  exports.showItem = function(req,res){
     if(req.user.role === "instructor"){
         var r = "instructor/";
+    }else if(req.user.role === "admin"){
+        var r = "admin/";
     }else{
         var r = "";
     }
@@ -156,10 +162,6 @@ exports.newItem = function(req,res){
  }
 
  exports.editItem = function(req,res){
-
-    function getPosition(string, subString, index) {
-        return string.split(subString, index).join(subString).length;
-    }
     var Iid = req.url.substr(1);
     console.log(getPosition(Iid, "?_method", 1));
     Iid = Iid.substring(0,getPosition(Iid, "?_method", 1));
@@ -176,7 +178,11 @@ exports.newItem = function(req,res){
         description : itemCon.description,
         location : itemCon.location
     }
-    items.update(newItem, function(err,result){
+
+    if (itemCon.instock > itemCon.total){
+        res.render("editItem", {item : newItem, msg : "Can't have more instock than total!"});
+    }else{
+         items.update(newItem, function(err,result){
         if(err){
             var errI = err.sqlMessage.slice(17,getPosition(err.sqlMessage,"\'",2));
             res.render("editItem", {item : newItem, msg : "Item " + errI + " already in database! Please choose another name or edit the existing item!"});
@@ -184,13 +190,14 @@ exports.newItem = function(req,res){
             res.redirect("/items/"+newItem.id);
         }
     });
+    }
+
+   
     
 }
 
 exports.addToItem = function(req,res){
-    function getPosition(string, subString, index) {
-        return string.split(subString, index).join(subString).length;
-    }
+
     var Iid = req.url.substr(1);
     console.log(getPosition(Iid, "?_method", 1));
     Iid = Iid.substring(0,getPosition(Iid, "?_method", 1));

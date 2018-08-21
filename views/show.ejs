@@ -28,6 +28,7 @@
                                 <li><button class="btn btn-default my-2 my-sm-0" type="submit">Add Item</button></li>
                             </form>
                         </ul>
+                        <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
                         <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
                         <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
                         <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
@@ -79,9 +80,10 @@
             </form>
             <form action="/items/<%= item.id %>/add?_method=Put" method="POST">
                 <button id="addBtnShow" type="submit" class="btn btn-primary">Add</button>
-                <input id="qAdd" type="number" name="amount" required placeholder="Qauntity to add" min=1>
+                <input id="qAdd" type="number" name="amount" required placeholder="Qauntity to add">
                 
             </form>
+    
             <div class="spacer">
 
             </div>
