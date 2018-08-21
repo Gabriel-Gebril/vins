@@ -229,7 +229,7 @@ exports.itemToCart = function(req,res,next){
             cart.add(result[0], result[0].id);
             req.session.cart = cart;
             console.log(req.session.cart);
-            res.redirect('/');
+            res.redirect('/items/'+itemId);
         }
     });
 }
