@@ -59,6 +59,21 @@ exports.saveCart = function(req,res){
             res.render(r+"cart", {pendingCart : pendingCart, savedCart : result, msg : "Can't checkout more than we have! Considering requesting more."});
         });
     }else{
+        for(var i = 0; i < pendingCart.length; i++){
+            var modItem = {
+                name : pendingCart[i].item.name,
+                instock : (parseInt(pendingCart[i].item.instock) - parseInt(itemCon.qty)),
+                total : pendingCart[i].item.total,
+                description : pendingCart[i].item.description,
+                location : pendingCart[i].item.location,
+                id : pendingCart[i].item.id
+            }
+            items.update(modItem,function(err,result){
+                console.log(err);
+            }); 
+        }
+
+
         checkedOut.createBulk(newItems, function(err,result){
             console.log(result);
             console.log(err);

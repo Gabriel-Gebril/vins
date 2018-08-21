@@ -29,9 +29,11 @@
                                     </form>
                                     
                                     <li>
-                                            <a href="#">
+                                            <a href="/cart">
+                                    
                                                 <i class="fa fa-shopping-cart"> Cart</i>
                                                 <span class="badge"> <%= session.cart.totalQty %> </span>
+                                                
                                             </a>
                                     </li>
                                     
@@ -84,15 +86,19 @@
             <h3>Location</h3>
             <p><%= item.location %></p>
 
-            
-            <a href="/items/add-to-cart/<%= item.id %>" class="btn btn-outline-success" >Add to cart</a>
+            <%if(item.instock == 0){%>
+                <p>Out of Stock!</p>
+            <%}else{%>
+                <a href="/items/add-to-cart/<%= item.id %>" class="btn btn-outline-success" >Add to cart</a>
+            <%}%>
+
             <form action="/items/<%= item.id %>/edit" method="GET">
                 <button id="editBtn" type="submit" class="btn btn-success"><i class="fas fa-edit"></i>Edit</button>
             </form>
             
             <form action="/items/<%= item.id %>/add?_method=Put" method="POST">
                 <button id="addBtnShow" type="submit" class="btn btn-primary">Add</button>
-                <input id="qAdd" type="number" name="amount" required placeholder="Qauntity to add">
+                <input id="qAdd" type="number" name="amount" required placeholder="Quantity to add">
                 
             </form>
     
