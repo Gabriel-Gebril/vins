@@ -18,27 +18,33 @@
     <body>
 
 <div id="container">
-        <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
-            <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+        <nav class="navbar navbar-dark navbar-expand-xl fixed-top">
+                <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <form action="/users" method="GET">
+                                <li><button id="uBtn" class="btn btn-Info" type="submit">Manage Users</button></li>
+                            </form>
+                            <li>
+                                    <a href="#">
+                                        <i class="fa fa-shopping-cart"> Cart</i>
+                                    </a>
+                            </li>
+                            
+                        </ul>
                         
-                        <form action="/users" method="GET">
-                            <li><button id="uBtn" class="btn btn-Info my-2 my-sm-0" type="submit">Manage Users</button></li>
+        
+                        <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
+                        
+                        <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
+                          <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
+                          <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
                         </form>
-                    
-                        
-                    </ul>
-                    <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
-                    <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
-                      <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
-                      <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                  </div>
-        </nav>
+                      </div>
+            </nav>
     </div>
 
 <form action="/items" method="POST">

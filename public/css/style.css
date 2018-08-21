@@ -166,6 +166,11 @@ img{
   box-shadow: 0 0 3px #ff0000;
 }
 
+#aaBtn{
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 #uBtn{
-  margin-left: 10px;
+  margin-right: 10px;
 }

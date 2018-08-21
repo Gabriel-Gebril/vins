@@ -1,6 +1,7 @@
 var items = require("../models/item"),
     express = require("express"),
-    faker = require("faker")
+    faker = require("faker"),
+    Cart = require('../models/cart');
 
 function getPosition(string, subString, index) {
     return string.split(subString, index).join(subString).length;
@@ -213,5 +214,22 @@ exports.addToItem = function(req,res){
         items.update(result[0], function(err,result){
             res.redirect("/items/"+Iid);
         });
+    });
+}
+
+exports.itemToCart = function(req,res,next){
+    var itemId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+    items.findById(itemId, function(err, result){
+        if(err){
+            return res.redirect('/');
+        }else{
+            // console.log(result[0]);
+            cart.add(result[0], result[0].id);
+            req.session.cart = cart;
+            console.log(req.session.cart);
+            res.redirect('/');
+        }
     });
 }

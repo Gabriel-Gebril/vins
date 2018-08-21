@@ -17,24 +17,34 @@
     </head>
     <body>
         <div id="container">
-            <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
-                <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <form action="/items/new" method="GET">
-                                <li><button class="btn btn-default my-2 my-sm-0" type="submit">Add Item</button></li>
-                            </form>
-                        </ul>
-                        <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
-                        <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
-                        <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
-                        <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </div>
-            </nav>
+                <nav class="navbar navbar-dark navbar-expand-xl fixed-top">
+                        <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto">
+                                    <form action="/items/new" method="GET">
+                                        <li><button id="aaBtn" class="btn btn-default" type="submit">Add Item</button></li>
+                                    </form>
+                                    
+                                    <li>
+                                            <a href="#">
+                                                <i class="fa fa-shopping-cart"> Cart</i>
+                                            </a>
+                                    </li>
+                                    
+                                </ul>
+                                
+                
+                                <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
+                                
+                                <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
+                                  <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
+                                  <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
+                                </form>
+                              </div>
+                    </nav>
         </div>
 
         <div class="container">
@@ -74,10 +84,11 @@
             <p><%= item.location %></p>
 
             
-            
+            <a href="/items/add-to-cart/<%= item.id %>" class="btn btn-outline-success" >Add to cart</a>
             <form action="/items/<%= item.id %>/edit" method="GET">
                 <button id="editBtn" type="submit" class="btn btn-success"><i class="fas fa-edit"></i>Edit</button>
             </form>
+            
             <form action="/items/<%= item.id %>/add?_method=Put" method="POST">
                 <button id="addBtnShow" type="submit" class="btn btn-primary">Add</button>
                 <input id="qAdd" type="number" name="amount" required placeholder="Qauntity to add">

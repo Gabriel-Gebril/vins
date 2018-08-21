@@ -57,6 +57,8 @@ router.get("/new", isCC , function(req,res){
     res.render(r+"newItem", {items : newItems, nItems : 1, dupItem : "0"});
 });
 
+router.get("/add-to-cart/:id",isCC, items.itemToCart);
+
 router.post("/", isCC , items.newItem)
 
 router.get("/:id", isInstructor , items.showItem);
