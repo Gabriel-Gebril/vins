@@ -59,6 +59,8 @@ router.get("/new", isCC , function(req,res){
 
 router.get("/add-to-cart/:id",isCC, items.itemToCart);
 
+router.get("/remove-from-cart/:id", isCC, items.itemFromCart);
+
 router.post("/", isCC , items.newItem)
 
 router.get("/:id", isInstructor , items.showItem);

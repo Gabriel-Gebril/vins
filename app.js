@@ -6,11 +6,13 @@ var express = require("express"),
     methodOverride = require("method-override"),
     authRoutes = require('./routes/authRoutes'),
     passportSetup = require('./config/passport-setup'),
-    passport = require("passport");
+    passport = require("passport"),
+    cartRoutes = require("./routes/cartRoutes");
 
 var db = require('./helpers/db');
 var session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
+var Cart = require('./models/cart');
 
 var sessionStore = new MySQLStore({},db);
 
@@ -24,6 +26,7 @@ app.use(session({
 
 app.use(function(req,res,next){
     res.locals.session = req.session;
+    req.session.cart = new Cart(req.session.cart ? req.session.cart : {});
     next();
 });
 
@@ -41,9 +44,10 @@ app.use('/auth',authRoutes);
 
 app.use(index);
 app.use("/users",user);
+app.use("/cart",cartRoutes);
 
 
 app.listen(3000,function(){
-            console.log('Serving app on port 3000');
+     console.log('Serving app on port 3000');
 });
 

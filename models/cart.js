@@ -12,6 +12,13 @@ module.exports = function Cart(oldCart){
 
     }
 
+    this.remove = function(id){
+        console.log(id);
+        this.totalQty -= this.items[id].qty;
+        delete this.items[id];
+         
+    }
+
     this.generateArray = function(){
         var arr = [];
         for (var id in this.items){

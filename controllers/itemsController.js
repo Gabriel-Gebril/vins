@@ -8,6 +8,7 @@ function getPosition(string, subString, index) {
 }
 
 exports.itemsGET = function(req, res){
+    
     // var randomProduct = [];
     // for(var i = 0; i<80; i++){
     //     randomProduct.push(faker.commerce.productName())
@@ -217,6 +218,7 @@ exports.addToItem = function(req,res){
     });
 }
 
+
 exports.itemToCart = function(req,res,next){
     var itemId = req.params.id;
     var cart = new Cart(req.session.cart ? req.session.cart : {});
@@ -232,4 +234,15 @@ exports.itemToCart = function(req,res,next){
             res.redirect('/items/'+itemId);
         }
     });
+}
+
+exports.itemFromCart = function(req,res,next){
+    var itemId = req.params.id;
+    var cart = new Cart(req.session.cart ? req.session.cart : {});
+            // console.log(result[0]);
+    cart.remove(itemId);
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect('/cart');
+    
 }

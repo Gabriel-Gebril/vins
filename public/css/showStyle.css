@@ -163,7 +163,10 @@ img{
     margin-right: 10px;
   }
   
- 
-  
+#checkOutBtn{
+  float: right;
+}
 
-  
+#title{
+  text-align: center;
+}
