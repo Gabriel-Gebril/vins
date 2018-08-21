@@ -1,5 +1,6 @@
 module.exports = function Cart(oldCart){
     this.items = oldCart.items || {};
+    this.totalQty = oldCar.totalQty || 0;
 
     this.add = function(item, id){
         var storedItem = this.items[id];
@@ -7,6 +8,7 @@ module.exports = function Cart(oldCart){
             storedItem = this.items[id] = {item:item,qty:0,reason:""};
         }
         storedItem.qty++;
+        this.totalQty++;
 
     }
 
