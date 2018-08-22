@@ -136,7 +136,7 @@ exports.deleteUser = function(req, res){
         sCart.forEach(function(cartI) {
             
             items.findById(cartI.id, function(err1,invItem){
-                console.log(invItem);
+                // console.log(invItem);
                 modI = {
                     name : invItem[0].name,
                     instock : invItem[0].instock + cartI.qty,
@@ -145,7 +145,7 @@ exports.deleteUser = function(req, res){
                     location : invItem[0].location,
                     id : invItem[0].id
                 }
-                 console.log(modI);
+                //  console.log(modI);
                 items.update(modI,function(err2,result1){
                     
                 });
