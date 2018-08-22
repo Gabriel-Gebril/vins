@@ -1,5 +1,7 @@
 var users = require("../models/user"),
     express = require("express");
+var items = require("../models/item");
+var checkedout = require("../models/checkedOut");
 
 exports.usersGET = function(req, res){
     // var randomProduct = [];
@@ -127,11 +129,40 @@ exports.deleteUser = function(req, res){
     }
     var id = req.url;
     id = id.slice(1,getPosition(id,"?_method",1));
-    users.removeById(id, function(err, result){
-       if (err){
-           console.log(err);
-       }else{
-           res.redirect("/users");
-       }
+
+    checkedout.userSavedCart(id, function(err, sCart){
+        // console.log(err)
+        
+        sCart.forEach(function(cartI) {
+            
+            items.findById(cartI.id, function(err1,invItem){
+                console.log(invItem);
+                modI = {
+                    name : invItem[0].name,
+                    instock : invItem[0].instock + cartI.qty,
+                    total : invItem[0].total,
+                    description : invItem[0].description,
+                    location : invItem[0].location,
+                    id : invItem[0].id
+                }
+                 console.log(modI);
+                items.update(modI,function(err2,result1){
+                    
+                });
+            });
+        });
+
+        users.removeById(id, function(err3, result2){
+            if (err){
+                // console.log(err3);
+            }else{
+                res.redirect("/users");
+            }
+         });
+            
+           
+        
     });
+
+    
 }

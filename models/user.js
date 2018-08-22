@@ -61,7 +61,11 @@ exports.update = function(userObj, callback){
 
 exports.removeById = function(uid, callback){
     var sql =  `DELETE FROM users WHERE uid=` + uid;
-    db.query(sql, function(err,result){
-        return callback(err,result);
+    var sql2 =  `DELETE FROM checkedout WHERE uid=` + uid;
+    db.query(sql, function(err1,result1){
+        db.query(sql,function(){
+            return callback(err1,result1);
+        });
+        
     });
 }
