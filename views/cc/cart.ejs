@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Venture Inventory</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/showStyle.css" >
+        <link rel="stylesheet" type="text/css" href="/vendor/fontawesome/css/fontawesome.min.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/brands.css">
+        <link rel="stylesheet" href="/vendor/fontawesome/css/solid.css">
+        <script src="/libs/jquery-3.3.1.min.js"></script>
+        <script src="/libs/bootstrap.bundle.min.js"></script>
+        <script src="/showAdd.js"></script>
+        <script src="cartFunctions.js"></script>
+        
+    </head>
+    <body>
+        <div id="container">
+                <nav class="navbar navbar-dark navbar-expand-xl fixed-top">
+                        <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto">
+                                    <form action="/items/new" method="GET">
+                                        <li><button id="aaBtn" class="btn btn-default" type="submit">Add Item</button></li>
+                                    </form>
+                                    <li>
+                                            <a href="/cart">
+                                    
+                                                <i class="fa fa-shopping-cart"> Cart</i>
+                                                <span class="badge"> <%= session.cart.totalQty %> </span>
+                                                
+                                            </a>
+                                    </li>
+                                    
+                                </ul>
+                                
+                
+                                <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
+                                
+                                <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
+                                  <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
+                                  <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
+                                </form>
+                              </div>
+                    </nav>
+        </div>
+
+       
+        <h1 id="title">Pending Items</h1>
+        <div class="container">
+            <p><%= msg %></p>
+            <form action="/cart" method="POST">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Reason</th>
+                        <th>Remove From Cart?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for (var i=0; i < pendingCart.length; i++){%>
+                        <tr>
+                            <td><%= pendingCart[i].item.name %></td>
+                            
+                            <td>
+                                <input type="number" name="qty" value="<%= pendingCart[i].qty %>" required placeholder="Amount added" min=1 max=<%= pendingCart[i].item.instock %>><p>/<%= pendingCart[i].item.instock %></p>
+                            </td>
+                            <td>
+                                <input type="text" name="reason" value="<%= pendingCart[i].reason %>" required placeholder="Camp"> 
+                            
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" href="/items/remove-from-cart/<%= pendingCart[i].item.id %>"><i class="fa fa-trash"></i></span>
+                            </td>
+                                
+                            
+                        </tr>
+                    
+                    <%}%>
+                
+                    
+
+                </tbody>
+            </table>
+            <%if(pendingCart.length != 0){%>
+                <button id="checkOutBtn" class="btn btn-success" type="submit">Check out</button>
+            <%}%>
+            
+        </form>
+        
+            
+            
+
+            
+            <div class="spacer"></div>
+
+            
+        
+        
+            
+        </div>
+
+        <h1 id="title">Checked Out Items</h1>
+
+        <div class="container">
+                <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Reason</th>
+                                <th>Sign Back In?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%for (var i=0; i < savedCart.length; i++){%>
+                                <tr>
+                                    <td><%= savedCart[i].itemName %></td>
+                                    
+                                    <td>
+                                        <%= savedCart[i].qty %>
+                                    </td>
+                                    <td>
+                                            <%= savedCart[i].reason %> 
+                                    
+                                    </td>
+                                    <td>
+                                        <form action="/cart/<%= savedCart[i].id %>?_method=DELETE" method="POST">
+                                            <input type="hidden" name="qty" value="<%= savedCart[i].qty %>">
+                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                        
+                                    
+                                </tr>
+                            
+                            <%}%>
+                        
+                            
+        
+                        </tbody>
+                    </table>
+        </div>
+
+        
+
+
+    </body>
+</html>

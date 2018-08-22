@@ -27,7 +27,7 @@
                                     <form action="/items/new" method="GET">
                                         <li><button id="aaBtn" class="btn btn-default" type="submit">Add Item</button></li>
                                     </form>
-                                    
+                                
                                     <li>
                                             <a href="/cart">
                                     
@@ -67,16 +67,20 @@
                     <thead>
                         <tr>
                             <th>Person</th>
-                            <th>Qauntity</th>
+                            <th>Quantity</th>
                             <th>Reason</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Name</td>
-                            <td>Num</td>
-                            <td>Camp</td>
-                        </tr>
+                        <%for(var i = 0; i < checkedOut.length; i++){%>
+                            <tr>
+                                <td><%= checkedOut[i].username %></td>
+                                <td><%= checkedOut[i].qty %></td>
+                                <td><%= checkedOut[i].reason %></td>
+                            </tr>
+                        <%}%>
+
+                        
     
                     </tbody>
                 </table>
@@ -85,13 +89,13 @@
 
             <h3>Location</h3>
             <p><%= item.location %></p>
-
             <%if(item.instock == 0){%>
                 <p>Out of Stock!</p>
             <%}else{%>
                 <a href="/items/add-to-cart/<%= item.id %>" class="btn btn-outline-success" >Add to cart</a>
             <%}%>
-
+            
+            
             <form action="/items/<%= item.id %>/edit" method="GET">
                 <button id="editBtn" type="submit" class="btn btn-success"><i class="fas fa-edit"></i>Edit</button>
             </form>
@@ -101,7 +105,7 @@
                 <input id="qAdd" type="number" name="amount" required placeholder="Quantity to add">
                 
             </form>
-    
+            
             <div class="spacer">
 
             </div>

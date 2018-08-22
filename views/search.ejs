@@ -1,120 +1,83 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Venture Inventory</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" media="screen" href="/css/showStyle.css" >
-        <link rel="stylesheet" type="text/css" href="/vendor/fontawesome/css/fontawesome.min.css">
-        <link rel="stylesheet" href="/vendor/fontawesome/css/brands.css">
-        <link rel="stylesheet" href="/vendor/fontawesome/css/solid.css">
-        <script src="/libs/jquery-3.3.1.min.js"></script>
-        <script src="/libs/bootstrap.bundle.min.js"></script>
-        <script src="/showAdd.js"></script>
-        
-    </head>
-    <body>
-        <div id="container">
-                <nav class="navbar navbar-dark navbar-expand-xl fixed-top">
-                        <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav mr-auto">
-                                    <form action="/items/new" method="GET">
-                                        <li><button id="aaBtn" class="btn btn-default" type="submit">Add Item</button></li>
-                                    </form>
+<% include ./partials/header.ejs %>
 
-                                    <li>
-                                            <a href="/cart">
+<div id="container">
+        <nav class="navbar navbar-dark navbar-expand-xl fixed-top">
+                <a class="navbar-brand" href="/"><img id="vLogo" src="/img/VentureLogo.png"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <form action="/items/new" method="GET">
+                                <li><button id="aaBtn" class="btn btn-default" type="submit">Add Item</button></li>
+                            </form>
+                            
+                            <li>
+                                    <a href="/cart">
                                     
-                                                <i class="fa fa-shopping-cart"> Cart</i>
-                                                <span class="badge"> <%= session.cart.totalQty %> </span>
-                                                
-                                            </a>
-                                    </li>
-                                    
-                                </ul>
-                                
-                
-                                <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
-                                
-                                <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
-                                  <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
-                                  <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
-                                </form>
-                              </div>
-                    </nav>
-        </div>
-
-        <div class="container">
-            <h1><%= item.name %></h1>
-            <div class="row">
-                <h3 class="col-sm">In stock: <%= item.instock %> </h3>
-                <h3 class="col-sm">Total: <%= item.total %></h3>
-            </div>
-           
-            
-            <h3>Description</h3>
-            <p><%= item.description %></p>
-            <h3>Signed Out By</h3>
-
-            <div class="container">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Person</th>
-                            <th>Quantity</th>
-                            <th>Reason</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%for(var i = 0; i < checkedOut.length; i++){%>
-                            <tr>
-                                <td><%= checkedOut[i].username %></td>
-                                <td><%= checkedOut[i].qty %></td>
-                                <td><%= checkedOut[i].reason %></td>
-                            </tr>
-                        <%}%>
-
+                                        <i class="fa fa-shopping-cart"> Cart</i>
+                                        <span class="badge"> <%= session.cart.totalQty %> </span>
+                                        
+                                    </a>
+                            </li>
+                            
+                        </ul>
                         
+        
+                        <a href="/auth/logout" class="btn btn-default my-2 my-sm-0">Logout</a>
+                        
+                        <form class="form-inline my-2 my-lg-0" action="/items/search" method="GET">
+                          <input class="form-control mr-sm-2" type="q" name="q" paceholder="Search" aria-label="Search">
+                          <button class="btn btn-default my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                      </div>
+            </nav>
+    </div>
     
-                    </tbody>
-                </table>
-            </div>
-            
-
-            <h3>Location</h3>
-            <p><%= item.location %></p>
-            <%if(item.instock == 0){%>
-                <p>Out of Stock!</p>
-            <%}else{%>
-                <a href="/items/add-to-cart/<%= item.id %>" class="btn btn-outline-success" >Add to cart</a>
+    
+        <table class="table responsive-table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>In Stock</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%if(isNaN(page)){%>
+                    <%page = 0;%>
+                <%}%>
+                <%for(var i = 0; i<item.length; i++){%>
+                    <%function cfl(string) {%>
+                        <%return string.charAt(0).toUpperCase() + string.slice(1);%>
+                    <%}%>
+                <tr>
+                        <td class="showItemBtn" id=<%= item[i].id %>><%= cfl(item[i].name) %></td>
+                    <td><%= item[i].instock %></td>
+                    <td><%= item[i].total %></td>
+                </tr>
+    
+                <%}%>   
+            </tbody>
+            <%if (message != ""){%>
+                <p id="sMsg"><%= message %></p>
             <%}%>
             
-            
-            <form action="/items/<%= item.id %>/edit" method="GET">
-                <button id="editBtn" type="submit" class="btn btn-success"><i class="fas fa-edit"></i>Edit</button>
-            </form>
-            
-            <form action="/items/<%= item.id %>/add?_method=Put" method="POST">
-                <button id="addBtnShow" type="submit" class="btn btn-primary">Add</button>
-                <input id="qAdd" type="number" name="amount" required placeholder="Quantity to add">
-                
-            </form>
-            
-            <div class="spacer">
-
-            </div>
-            
-        </div>
+        </table>
         
-            
-        </div>
+    
 
-
+<footer class="footer">
+        <form action="/items/search" method="GET">
+            <input type="hidden" name="q" value= "<%= search %>" >
+            <button class="btn btn-default" name="count" value=<%= page + 1%> >Next Page</button>
+        </form>
+  
+        <form action="/items/search" method="GET">
+            <input type="hidden" name="q" value= "<%= search %>" >
+            <button class="btn btn-default" name="count" id="pPage" value=<%= page - 1%> >Previous Page</button>
+        </form>
+          
+      </footer>
     </body>
-</html>
+  </html>
