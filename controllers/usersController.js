@@ -41,7 +41,7 @@ exports.showEditUser = function(req,res){
     }
     var id = req.url;
     id = id.slice(1,getPosition(id,"/edit",1));
-    console.log(id);
+    // console.log(id);
     users.find({uid:id},function(err, result){
         res.render("admin/editUser",{user:result[0],msg : "", editor : req.user.uid})
     });
@@ -52,7 +52,7 @@ exports.showEditUser = function(req,res){
     id = id.substr(1);
     console.log(id);
     users.find({uid:id},function(err, result){
-        console.log(result);
+        // console.log(result);
         res.render("admin/showUser",{user:result[0]});
     });
  }
@@ -63,7 +63,7 @@ exports.showEditUser = function(req,res){
     
      users.removeById(id, function(err, result){
         if (err){
-            console.log(err);
+            // console.log(err);
         }else{
             res.redirect("/users");
         }
@@ -86,7 +86,7 @@ exports.showEditUser = function(req,res){
         // }else{
         //     res.render("admin/search", {item: result,message : "", page :  parseInt(req.query.count), search : req.query.q});
         // }
-        console.log(result);
+        // console.log(result);
         if(isNaN(parseInt(req.query.count))){
             res.render("admin/userSearch", {user: result, page :  parseInt(req.query.count), message : "", search:req.query.q});
         }else if (result.length === 0){
@@ -104,18 +104,18 @@ exports.editUser = function(req,res){
         return string.split(subString, index).join(subString).length;
     }
     var Iid = req.url.substr(1);
-    console.log(getPosition(Iid, "?_method", 1));
+    // console.log(getPosition(Iid, "?_method", 1));
     Iid = Iid.substring(0,getPosition(Iid, "?_method", 1));
 
     var userCon = req.body;
-    console.log(userCon);
+    // console.log(userCon);
     
     var newUser = {
         uid : Iid,
         username : userCon.username, 
         role : userCon.role
     }
-    console.log(newUser);
+    // console.log(newUser);
     users.update(newUser, function(err,result){
         res.redirect("/users/"+newUser.uid);
     

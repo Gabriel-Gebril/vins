@@ -48,7 +48,6 @@ exports.removeFromCheckedout = function(obj, callback){
 exports.userSavedCart = function(uid, callback){
 
     var sql = `SELECT * FROM checkedout WHERE uid=` + uid;
-
     db.query(sql, function(err,result){
         return callback(err,result);
     });

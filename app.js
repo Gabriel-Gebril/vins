@@ -46,6 +46,16 @@ app.use(index);
 app.use("/users",user);
 app.use("/cart",cartRoutes);
 
+var gracefulShutdown = function(){
+    db.end();
+}
+
+// listen for TERM signal .e.g. kill 
+process.on ('SIGTERM', gracefulShutdown);
+
+// listen for INT signal e.g. Ctrl-C
+process.on ('SIGINT', gracefulShutdown);   
+
 
 app.listen(3000,function(){
      console.log('Serving app on port 3000');
