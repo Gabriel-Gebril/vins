@@ -136,10 +136,17 @@ exports.newItem = function(req,res){
     }else{
         var r = "";
     }
-    var id = req.url;
-    id = parseInt(id.substr(1));
+    var id = req.params.id;
+
+    
+
     items.findById(id,function(err, result){
-        res.render(r+"show",{item:result[0]});
+        console.log(result[0].name);
+        items.usersCheckOut(result[0].name,function(err2,result2){
+            console.log(err2);
+            res.render(r+"show",{item:result[0], checkedOut : result2});
+        });
+        
     });
  }
 

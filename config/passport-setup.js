@@ -3,15 +3,13 @@ var GoogleStrategy = require("passport-google-oauth20");
 var keys = require("./keys");
 var users = require("../models/user")
 
-passport.serializeUser((user,done)=>{
-    done(null,user.uid);
-});
-
-passport.deserializeUser((uid,done)=>{
-    users.find({uid:uid},function(err,result){
-        done(null,result[0]);
-    });
-});
+passport.serializeUser(function(user, done) {
+    done(null, user);
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    done(null, user);
+  });
 
 passport.use(
     new GoogleStrategy({

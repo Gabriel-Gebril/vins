@@ -69,16 +69,20 @@
                     <thead>
                         <tr>
                             <th>Person</th>
-                            <th>Qauntity</th>
+                            <th>Quantity</th>
                             <th>Reason</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Name</td>
-                            <td>Num</td>
-                            <td>Camp</td>
-                        </tr>
+                        <%for(var i = 0; i < checkedOut.length; i++){%>
+                            <tr>
+                                <td><%= checkedOut[i].username %></td>
+                                <td><%= checkedOut[i].qty %></td>
+                                <td><%= checkedOut[i].reason %></td>
+                            </tr>
+                        <%}%>
+
+                        
     
                     </tbody>
                 </table>

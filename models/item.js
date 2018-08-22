@@ -107,3 +107,13 @@ exports.update = function(itemObj, callback){
         return callback(err,result);
     });
 }
+
+exports.usersCheckOut = function(name, callback){
+
+    var sql = "SELECT username, qty, reason FROM checkedout t1 INNER JOIN users t2 on t1.uid = t2.uid WHERE t1.itemName='" + name + "\'";
+
+    db.query(sql, function(err, result){
+        return callback(err,result);
+    });
+
+}
