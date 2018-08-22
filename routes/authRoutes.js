@@ -3,7 +3,7 @@ var router = require("express").Router(),
 
 router.get('/logout', function(req, res){
     req.logout();
-    res.redirect('auth/google');
+    res.redirect('https://accounts.google.com/logout');
 });
 
 router.get('/google', passport.authenticate("google",{

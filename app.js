@@ -48,6 +48,17 @@ app.use("/cart",cartRoutes);
 
 var gracefulShutdown = function(){
     db.end();
+    server.close(function() {
+        console.log("Closed out remaining connections.");
+        process.exit()
+      });
+      
+       // if after 
+       setTimeout(function() {
+           console.error("Could not close connections in time, forcefully shutting down");
+           process.exit()
+      }, 10*1000);
+    
 }
 
 // listen for TERM signal .e.g. kill 
@@ -57,7 +68,7 @@ process.on ('SIGTERM', gracefulShutdown);
 process.on ('SIGINT', gracefulShutdown);   
 
 
-app.listen(3000,function(){
+var server = app.listen(3000,function(){
      console.log('Serving app on port 3000');
 });
 
