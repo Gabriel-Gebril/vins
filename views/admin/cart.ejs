@@ -80,7 +80,7 @@
                             
                             </td>
                             <td>
-                                <a href="/items/remove-from-cart/<%= pendingCart[i].item.id %>"><i class="fa fa-trash"></i></span>
+                                <a class="btn btn-danger" href="/items/remove-from-cart/<%= pendingCart[i].item.id %>"><i class="fa fa-trash"></i></span>
                             </td>
                                 
                             
@@ -135,7 +135,10 @@
                                     
                                     </td>
                                     <td>
-                                            <a href="# %>"><i class="fa fa-trash"></i></span>
+                                        <form action="/cart/<%= savedCart[i].id %>?_method=DELETE" method="POST">
+                                            <input type="hidden" name="qty" value="<%= savedCart[i].qty %>">
+                                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                        </form>
                                     </td>
                                         
                                     

@@ -15,4 +15,6 @@ router.get('/', isCC, cart.getCart);
 
 router.post('/', isCC, cart.saveCart);
 
+router.delete('/:id', isCC, cart.removeFromSaved);
+
 module.exports = router;

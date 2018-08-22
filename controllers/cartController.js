@@ -16,8 +16,8 @@ exports.getCart = function(req,res){
     }
 
     var pendingCart = req.session.cart.generateArray();
-
-    checkedOut.userSavedCart(req.session.passport.user, function(err,result){
+    checkedOut.userSavedCart(req.session.passport.user.uid, function(err,result){
+        console.log(err);
         res.render(r+"cart", {pendingCart : pendingCart, savedCart : result, msg : ""});
     });
 
@@ -39,7 +39,8 @@ exports.saveCart = function(req,res){
     var pendingCart = req.session.cart.generateArray();
     
     var newItems = {
-        uid : req.session.passport.user, 
+        uid : req.session.passport.user.uid, 
+        id : [],
         itemName : [],
         qty : itemCon.qty,
         reason : itemCon.reason
@@ -48,6 +49,7 @@ exports.saveCart = function(req,res){
     var valid = true;
     for(var i = 0; i < pendingCart.length; i++){
         newItems.itemName.push(pendingCart[i].item.name);
+        newItems.id.push(pendingCart[i].item.id);
         if(itemCon.qty[i] > pendingCart[i].item.instock){
             valid = false;
             break;
@@ -86,3 +88,26 @@ exports.saveCart = function(req,res){
 
 }
 
+exports.removeFromSaved = function(req, res){
+    var rItem = {
+        uid : req.session.passport.user.uid, 
+        id : req.params.id,
+        qty : req.body.qty
+    }
+    checkedOut.removeFromCheckedout(rItem, function(err,result){
+        items.findById(rItem.id, function(err,result){
+            var modItem = {
+                name : result[0].name,
+                instock : (parseInt(result[0].instock) + parseInt(rItem.qty)),
+                total : result[0].total,
+                description :result[0].description,
+                location : result[0].location,
+                id : req.params.id
+            }
+            items.update(modItem,function(err1,result1){
+                console.log(err1);
+            }); 
+        });
+        res.redirect('/cart');
+    });
+}

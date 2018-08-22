@@ -8,11 +8,13 @@ db.query(createUsers,function(err,result){
     }else{
         //console.log(result);
     }
+
 });
 
 exports.createUser = function(obj, callback){
     var sql = "INSERT INTO users(uid,username,role) VALUES("+obj.uid+","+"\""+obj.username+"\""+"," +"\""+obj.role+"\""+")";
     db.query(sql,function(err,result){
+
         return callback(err,result);
     });
 }

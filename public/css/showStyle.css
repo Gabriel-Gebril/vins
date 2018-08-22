@@ -110,6 +110,10 @@ img{
     margin-bottom: 20px;
   }
 
+  input[name="reason"]{
+    text-transform: none; 
+  }
+
   #cancelBtn{
     float: left;
     margin: 0;

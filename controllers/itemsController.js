@@ -3,6 +3,8 @@ var items = require("../models/item"),
     faker = require("faker"),
     Cart = require('../models/cart');
 
+var checkedOut = require("../models/checkedOut");
+
 function getPosition(string, subString, index) {
     return string.split(subString, index).join(subString).length;
 }
@@ -157,7 +159,10 @@ exports.newItem = function(req,res){
         if (err){
             console.log(err);
         }else{
-            res.redirect("/items");
+            checkedOut.removeFromCheckedout({uid:req.session.passport.user.uid,id:id},function(err,result){
+                res.redirect("/items");
+            })
+            
         }
      })
  }
