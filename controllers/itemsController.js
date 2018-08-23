@@ -143,7 +143,7 @@ exports.newItem = function(req,res){
     
 
     items.findById(id,function(err, result){
-        console.log(result[0].name);
+        // console.log(result[0].name);
         items.usersCheckOut(result[0].name,function(err2,result2){
             console.log(err2);
             res.render(r+"show",{item:result[0], checkedOut : result2});
@@ -182,7 +182,7 @@ exports.newItem = function(req,res){
     Iid = parseInt(Iid);
 
     var itemCon = req.body;
-    console.log(itemCon);
+    // console.log(itemCon);
     
     var newItem = {
         id : Iid,
@@ -213,7 +213,7 @@ exports.newItem = function(req,res){
 exports.addToItem = function(req,res){
 
     var Iid = req.url.substr(1);
-    console.log(getPosition(Iid, "?_method", 1));
+    // console.log(getPosition(Iid, "?_method", 1));
     Iid = Iid.substring(0,getPosition(Iid, "?_method", 1));
     Iid = parseInt(Iid);
 
@@ -242,7 +242,7 @@ exports.itemToCart = function(req,res,next){
             // console.log(result[0]);
             cart.add(result[0], result[0].id);
             req.session.cart = cart;
-            console.log(req.session.cart);
+            // console.log(req.session.cart);
             res.redirect('/items/'+itemId);
         }
     });
@@ -254,7 +254,7 @@ exports.itemFromCart = function(req,res,next){
             // console.log(result[0]);
     cart.remove(itemId);
     req.session.cart = cart;
-    console.log(req.session.cart);
+    // console.log(req.session.cart);
     res.redirect('/cart');
     
 }

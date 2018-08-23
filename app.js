@@ -47,8 +47,9 @@ app.use("/users",user);
 app.use("/cart",cartRoutes);
 
 var gracefulShutdown = function(){
-    db.end();
+    
     server.close(function() {
+        db.end();
         console.log("Closed out remaining connections.");
         process.exit()
       });

@@ -77,7 +77,7 @@ exports.saveCart = function(req,res){
 
 
         checkedOut.createBulk(newItems, function(err,result){
-            console.log(result);
+            // console.log(result);
             console.log(err);
             req.session.cart = {};
             res.redirect("/cart");

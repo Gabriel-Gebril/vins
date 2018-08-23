@@ -50,7 +50,7 @@ exports.showEditUser = function(req,res){
  exports.showUser = function(req,res){
     var id = req.url;
     id = id.substr(1);
-    console.log(id);
+    // console.log(id);
     users.find({uid:id},function(err, result){
         // console.log(result);
         res.render("admin/showUser",{user:result[0]});
