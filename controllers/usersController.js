@@ -36,11 +36,7 @@ exports.usersGET = function(req, res){
 }
 
 exports.showEditUser = function(req,res){
-    function getPosition(string, subString, index) {
-        return string.split(subString, index).join(subString).length;
-    }
-    var id = req.url;
-    id = id.slice(1,getPosition(id,"/edit",1));
+    var id = req.params.id;
     // console.log(id);
     users.find({uid:id},function(err, result){
         res.render("admin/editUser",{user:result[0],msg : "", editor : req.user.uid})
@@ -48,9 +44,7 @@ exports.showEditUser = function(req,res){
  }
 
  exports.showUser = function(req,res){
-    var id = req.url;
-    id = id.substr(1);
-    // console.log(id);
+    var id = req.params.id;
     users.find({uid:id},function(err, result){
         // console.log(result);
         res.render("admin/showUser",{user:result[0]});
@@ -103,9 +97,7 @@ exports.editUser = function(req,res){
     function getPosition(string, subString, index) {
         return string.split(subString, index).join(subString).length;
     }
-    var Iid = req.url.substr(1);
-    // console.log(getPosition(Iid, "?_method", 1));
-    Iid = Iid.substring(0,getPosition(Iid, "?_method", 1));
+    var Iid = req.params.id;
 
     var userCon = req.body;
     // console.log(userCon);
@@ -124,11 +116,7 @@ exports.editUser = function(req,res){
 }
 
 exports.deleteUser = function(req, res){
-    function getPosition(string, subString, index) {
-        return string.split(subString, index).join(subString).length;
-    }
-    var id = req.url;
-    id = id.slice(1,getPosition(id,"?_method",1));
+    var id = req.params.id
 
     checkedout.userSavedCart(id, function(err, sCart){
         // console.log(err)
