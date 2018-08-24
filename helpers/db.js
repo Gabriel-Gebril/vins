@@ -1,9 +1,10 @@
 var mysql = require('mysql');
+var keys = require("./keys");
 
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'XFaSfdu*535UPSHgY3gsxm8j9j$T7O8n',
+    password: keys.mysql.password,
     database: "venturetmp",
   });
 
