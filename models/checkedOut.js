@@ -2,7 +2,7 @@ var db = require('../helpers/db');
 
 
 //TODO Refactor database for signed_out_by to be a list of user ids.
-var createCheckedOut = `CREATE TABLE IF NOT EXISTS checkedOut(`
+var createCheckedOut = `CREATE TABLE IF NOT EXISTS checkedout(`
                         +`uid VARCHAR(255) NOT NULL ,`
                         +`id VARCHAR(255) NOT NULL ,`
                         +`itemName VARCHAR(255) NOT NULL ,`
