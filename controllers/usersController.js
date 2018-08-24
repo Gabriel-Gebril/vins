@@ -93,10 +93,6 @@ exports.showEditUser = function(req,res){
 
 
 exports.editUser = function(req,res){
-
-    function getPosition(string, subString, index) {
-        return string.split(subString, index).join(subString).length;
-    }
     var Iid = req.params.id;
 
     var userCon = req.body;
