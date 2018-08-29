@@ -69,7 +69,7 @@ process.on ('SIGTERM', gracefulShutdown);
 process.on ('SIGINT', gracefulShutdown);   
 
 
-var server = app.listen(3000,function(){
+var server = app.listen(80,function(){
      console.log('Serving app on port 3000');
 });
 

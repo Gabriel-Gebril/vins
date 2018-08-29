@@ -16,7 +16,7 @@ db.query(createCheckedOut, function(err,result){
 });
 
 exports.createBulk = function(obj,callback){
-    var sql = "INSERT INTO checkedOut(uid,id,itemName,qty,reason) VALUES";
+    var sql = "INSERT INTO checkedout(uid,id,itemName,qty,reason) VALUES";
     var values = "";
     if(Array.isArray(obj.qty)){
         for (let i = 0; i < obj.qty.length; i++) {

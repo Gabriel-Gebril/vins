@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var keys = require("./keys");
+var keys = require("../config/keys");
 
 var connection = mysql.createConnection({
     host: 'localhost',
